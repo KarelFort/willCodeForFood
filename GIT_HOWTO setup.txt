@@ -1,0 +1,32 @@
+1. Stahnout a nainstalovat GIT http://msysgit.github.io/ 
+   postup: while(TRUE){next->} 
+   
+2. Stahnout a nainstalovat TortoiseGit 
+   https://code.google.com/p/tortoisegit/wiki/Download?tm=2 
+   postup: while(TRUE){next->}
+   
+3. S TortoiseGitem se nainstaluje i PuTTYgen - generator ssh klicu,
+   spuste ho a vygenerujte klic, zkopirujte ten public 
+   (Public key for pasting into OpenSSH authorized_keys)
+   a ulozte si nekam private klic (muzete ho jeste zabezpecit heslem, your choice)
+   
+4. Na githubu v nastaveni uctu je zalozka "SSH Keys", vytvorte novy klic
+   a vlozte tam ten public
+   
+5. Na githubu v project home je vpravo "HTTPS clone URL", zkopirujte tu adresu
+
+6. Presunte se do adresare kde budete chtit vytvorit lokalni repozitar,
+   kliknete pravym -> Git Clone...
+   do URL vlozte zkopirovanou adresu z githubu, ostatni nemente -> OK
+   
+7. Pravym na slozku ktera se vytvorila (willCodeForFood), 
+   TortoiseGit -> settings
+   7a. Zalozka Git 
+     - V "Config source" zvolit "Global" + dopsat jmeno a mail ktere jste napsali na githubu,
+       u ID nechte "inherit"
+   7b. Zalozka Git -> remote
+     - v poli "URL:" by jiz mela byt adresa na github
+     - do pole "Putty Key:" vlozte cestu k private ssh klici
+      
+8. Ted by melo byt vse nastaveny, muzete zkusit vytvorit soubor,
+   neco do nej napsat a commitnout
