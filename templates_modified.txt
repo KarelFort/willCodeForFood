@@ -1,0 +1,154 @@
+{"ActiveSync - devices - Details":
+"select APPLICATION as Device, count(APPLICATION) as Count,(Count(APPLICATION)* 100 / (Select Count(*) From Clients where 
+CLIENT_NAME like "ActiveSync%")) as Percentage from Clients where CLIENT_NAME like "ActiveSync%" group by APPLICATION 
+order by Count desc",
+
+"ActiveSync - devices - General":
+"select EAS_FAMILY as Device, count(*) as Count, (Count(*)* 100 / (Select Count(*) From Clients where 
+CLIENT_NAME like "ActiveSync%")) as Percentage from Clients where CLIENT_NAME like "ActiveSync%" group by EAS_FAMILY order by Count desc",
+
+"ActiveSync - devices - other":
+"select * from Clients where CLIENT_NAME like "ActiveSync%" and EAS_FAMILY like "Other%"",
+
+"ActiveSync - versions":
+"select CLIENT_NAME as Client, count(CLIENT_NAME) as Count, (count(CLIENT_NAME) *100 / (select count(*) from Clients where 
+CLIENT_NAME like "ActiveSync%")) as Percentage from Clients where CLIENT_NAME like "ActiveSync%" group by CLIENT_NAME order by Count desc",
+
+"All clients":
+"select CLIENT_NAME as Client, count(CLIENT_NAME) as Count, (Count(CLIENT_NAME)* 100 / (Select Count(*) From Clients)) as Percentage 
+from Clients group by CLIENT_NAME order by Count desc",
+
+"All clients - without KerioAPI":
+"select CLIENT_NAME as Client, count(CLIENT_NAME) as Count from Clients where CLIENT_NAME <> "Public API" group by CLIENT_NAME order by Count desc",
+
+"Blackberry Connector - BES installation count":
+"select CLIENT_NAME as Client, APPLICATION_BINARY as Version, REMINDER_ID as InstallationID from Clients where CLIENT_NAME like "KBC" group by REMINDER_ID",
+
+"Blackberry Connector - BES version":
+"select CLIENT_NAME as Client, APPLICATION_BINARY as Version, count(DISTINCT REMINDER_ID) as NumberOfInstallations from Clients 
+where CLIENT_NAME like "KBC" group by APPLICATION_BINARY order by NumberOfInstallations desc",
+
+"Blackberry Connector - client OS":
+"select CLIENT_NAME as Client, CLIENT_OS as Version, count(DISTINCT REMINDER_ID,USER_ID) as Count from Clients where CLIENT_NAME like "KBC" 
+group by CLIENT_OS order by Count desc",
+
+"Blackberry Connector - devices":
+"select CLIENT_NAME as Client, APPLICATION as Version, count(APPLICATION) as Count from Clients where CLIENT_NAME like "KBC" 
+group by APPLICATION order by Count desc",
+
+"CalDAV - all clients":
+"select CLIENT_NAME as Client, APPLICATION as Version, count(APPLICATION) as Count from Clients where 
+(CLIENT_NAME like "CalDAV" or APPLICATION like "% iCal%" or APPLICATION like "% Calendar%" or APPLICATION like "% dataaccessd%") and 
+CLIENT_NAME not like "EWS" group by APPLICATION order by Count desc # jschwarzmeier",
+
+"CalDAV - clients":
+"select CLIENT_NAME as Client, APPLICATION as Version, count(APPLICATION) as Count from Clients where CLIENT_NAME like "CalDAV" group by 
+APPLICATION order by Count desc",
+
+"CardDAV - all clients":
+"select CLIENT_NAME as Client, APPLICATION as Version, count(APPLICATION) as Count from Clients where (CLIENT_NAME like "CardDAV" or 
+APPLICATION like "% CardDAVPlugin%" or APPLICATION like "% Contacts%" or APPLICATION like "% AddressBook%") and CLIENT_NAME not like "EWS" 
+group by APPLICATION order by Count desc # jschwarzmeier",
+
+"CardDAV - clients":
+"select CLIENT_NAME as Client, APPLICATION as Version, count(APPLICATION) as Count from Clients where CLIENT_NAME like "CardDAV" 
+group by APPLICATION order by Count desc",
+
+"EWS - clients":
+"select CLIENT_NAME as Client, APPLICATION as Version, count(APPLICATION) as Count from Clients where CLIENT_NAME like "EWS" 
+group by APPLICATION order by Count desc",
+
+"KOFF - clients":
+"select CLIENT_NAME as Client, APPLICATION as Version, count(APPLICATION) as Count from Clients where CLIENT_NAME like "KOFF" 
+group by APPLICATION order by Count desc",
+
+"KSC - clients by OS":
+"select CLIENT_OS as "Client OS", count(*) as Count from Clients where APPLICATION like "KSC%" group by CLIENT_OS order by Count desc",
+
+"KSC - clients by version":
+"select APPLICATION as Client, count(*) as Count from Clients where APPLICATION like "KSC%" group by APPLICATION order by Count desc",
+
+"Public API - clients":
+"select CLIENT_NAME as Protocol, APPLICATION as "Public API client", count(APPLICATION) as Count from Clients where CLIENT_NAME="Public API" 
+group by APPLICATION order by Count desc",
+
+"Public API - WAM top functions":
+"select APPLICATION as "Public API client", APPLICATION_BINARY as Function, count(APPLICATION_BINARY) as Count from Clients where 
+CLIENT_NAME="Public API" and APPLICATION="Kerio/WAM" group by APPLICATION_BINARY order by Count desc",
+
+"Public API - WM2 top functions":
+"select APPLICATION as "Public API client", APPLICATION_BINARY as Function, count(APPLICATION_BINARY) as Count from Clients where 
+CLIENT_NAME="Public API" and APPLICATION="Kerio/WebMail" group by APPLICATION_BINARY order by Count desc",
+  
+"WebAdmin browsers":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME = "WebAdmin" 
+group by APPLICATION having Count > 10 order by Count desc",
+
+"WebAdmin browsers Chrome":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME = "WebAdmin" and 
+APPLICATION like "Chrome%" group by APPLICATION having Count > 10 order by Count desc",
+
+"WebAdmin browsers Firefox":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME = "WebAdmin" and 
+APPLICATION like "Firefox%" group by APPLICATION having Count > 10 order by Count desc",
+
+"WebAdmin browsers MSIE":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME = "WebAdmin" and 
+APPLICATION like "MSIE%" group by APPLICATION having Count > 10 order by Count desc",
+
+"WebAdmin browsers Safari":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME = "WebAdmin" and 
+APPLICATION like "Safari%" group by APPLICATION having Count > 10 order by Count desc",
+
+"WebDAV - Entourage versions":
+"select CLIENT_NAME as Client, APPLICATION as Version, count(APPLICATION) as Count from Clients where CLIENT_NAME like "WebDAV" and 
+APPLICATION like "Entourage%" group by APPLICATION order by Count desc",
+
+"WebMail2 browsers":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME = "WebMail2" 
+group by APPLICATION having Count > 10 order by Count desc",
+
+"WebMail2 browsers - Chrome":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME = "WebMail2" and 
+APPLICATION like "Chrome%" group by Browser order by Count desc",
+
+"WebMail2 browsers - Firefox":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME = "WebMail2" and 
+APPLICATION like "Firefox%" group by Browser order by Count desc",
+
+"WebMail2 browsers - MSIE":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME = "WebMail2" and 
+APPLICATION like "MSIE%" group by Browser order by Count desc",
+
+"WebMail2 browsers - Safari":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME = "WebMail2" and 
+APPLICATION like "Safari%" group by Browser order by Count desc",
+
+"WebMail browsers":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME = "WebMail" 
+group by APPLICATION having Count > 10 order by Count desc",
+
+"WebMail browsers - Chrome":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME = "WebMail" and 
+APPLICATION like "Chrome%" group by Browser order by Count desc",
+
+"WebMail browsers - Firefox":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME = "WebMail" and 
+APPLICATION like "Firefox%" group by Browser order by Count desc",
+
+"WebMail browsers - MSIE":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME = "WebMail" and 
+APPLICATION like "MSIE%" group by Browser order by Count desc",
+
+"WebMail browsers - Safari":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients  where CLIENT_NAME = "WebMail" and 
+APPLICATION like "Safari%" group by Browser order by Count desc",
+
+"WebMail Mini browsers":
+"select CLIENT_NAME as Client, APPLICATION as Browser, count(APPLICATION) as Count from Clients where CLIENT_NAME like "WebMail Mini" 
+group by APPLICATION having Count > 10 order by Count desc",
+
+"XMPP - installations":
+"select CLIENT_NAME as Client, REMINDER_ID as InstallationID, count(USER_ID) as NumberOfUsers from Clients  where CLIENT_NAME like "XMPP" 
+group by REMINDER_ID order by NumberOfUsers desc"
+}
