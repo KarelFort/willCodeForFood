@@ -7,3 +7,13 @@
 	color: red;
 	
 }
+
+#aktualizovat-tlacitko {
+	position:relative;
+	float: right;
+	text-align: center;
+}
+
+.page-header {
+  padding-bottom: 14px;
+}

@@ -14,7 +14,7 @@
 <link href="css/dashboard.css" rel="stylesheet" type="text/css">
 <link href="css/dataTables.bootstrap.css" rel="stylesheet"
 	type="text/css">
-
+<link href="css/styl.css" rel="stylesheet" type="text/css">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -65,6 +65,13 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div id="aktualizovat-tlacitko">
+					<a href="index">
+						<button type="button" class="btn btn-primary" >Aktualizovat databázi</button>
+					</a>
+					<p> Poslední aktualizace 12. 4. 2015 v 16:55</p>
+				</div>
+				
 				<h1 class="page-header">SQL dotaz 1</h1>
 
 				<h5>Podrobnější popis dotazu, co dává za výsledky</h5>
