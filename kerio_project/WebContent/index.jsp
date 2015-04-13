@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,9 +130,9 @@
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" language="javascript"
+	<script type="text/javascript" 
 		src="js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" language="javascript"
+	<script type="text/javascript"
 		src="js/dataTables.bootstrap.js"></script>
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function() {
