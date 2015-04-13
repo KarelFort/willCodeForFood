@@ -49,18 +49,9 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="#">SQL dotaz 1<span
+					<li class="active"><a href="#">Verze ActiveSync<span
 							class="sr-only">(current)</span></a></li>
-					<li><a href="#">SQL dotaz 2</a></li>
-					<li><a href="#">SQL dotaz 3</a></li>
-					<li><a href="#">SQL dotaz 4</a></li>
-					<li><a href="#">SQL dotaz 5</a></li>
-					<li><a href="#">SQL dotaz 6</a></li>
-					<li><a href="#">SQL dotaz 7</a></li>
-					<li><a href="#">SQL dotaz 8</a></li>
-					<li><a href="#">SQL dotaz 9</a></li>
-					<li><a href="#">SQL dotaz 10</a></li>
-					<li><a href="#">SQL dotaz 11</a></li>
+					
 					<li><a href="#">...</a></li>
 				</ul>
 			</div>
@@ -72,63 +63,38 @@
 					<p> Poslední aktualizace 12. 4. 2015 v 16:55</p>
 				</div>
 				
-				<h1 class="page-header">SQL dotaz 1</h1>
+				<h1 class="page-header">Verze ActiveSync</h1>
 
-				<h5>Podrobnější popis dotazu, co dává za výsledky</h5>
+				<h5>Procentuální zastoupení jednotlivých verzí ActiveSync</h5>
+				<h5>select APPLICATION as Device,count(APPLICATION) as Count,(Count(APPLICATION)*100, (Select Count(*) From Clients where CLIENT_NAME like "ActiveSync%")) as Percentage from Clients where CLIENT_NAME like "ActiveSync%" group by APPLICATION order by Count desc;</h5>
+				
 				<br>
 
 				<table id="tabulka" class="display" cellspacing="0" width="100%">
 					<thead>
 						<tr>
-							<th>Name</th>
-							<th>Position</th>
-							<th>Office</th>
-							<th>Salary</th>
+							<th>Device</th>
+							<th>Count</th>
+							<th>Percentage</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>Tiger Nixon</td>
-							<td>System Architect</td>
-							<td>Edinburgh</td>
-							<td>$320,800</td>
+							<td>ActiveSync4.0</td>
+							<td>165</td>
+							<td>16.5</td>
 						</tr>
 						<tr>
-							<td>Garrett Winters</td>
-							<td>Accountant</td>
-							<td>Tokyo</td>
-							<td>$170,750</td>
+							<td>ActiveSync4.1</td>
+							<td>380</td>
+							<td>38</td>
 						</tr>
 						<tr>
-							<td>Ashton Cox</td>
-							<td>Junior Technical Author</td>
-							<td>San Francisco</td>
-							<td>$86,000</td>
+							<td>ActiveSync4.5</td>
+							<td>455</td>
+							<td>45.5</td>
 						</tr>
-						<tr>
-							<td>Cedric Kelly</td>
-							<td>Senior Javascript Developer</td>
-							<td>Edinburgh</td>
-							<td>$433,060</td>
-						</tr>
-						<tr>
-							<td>Airi Satou</td>
-							<td>Accountant</td>
-							<td>Tokyo</td>
-							<td>$162,700</td>
-						</tr>
-						<tr>
-							<td>Brielle Williamson</td>
-							<td>Integration Specialist</td>
-							<td>New York</td>
-							<td>$372,000</td>
-						</tr>						
-						<tr>
-							<td>Donna Snider</td>
-							<td>Customer Support</td>
-							<td>New York</td>
-							<td>$112,000</td>
-						</tr>
+												
 					</tbody>
 				</table>
 			</div>
