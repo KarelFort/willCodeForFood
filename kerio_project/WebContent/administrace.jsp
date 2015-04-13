@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--  <link rel="icon" href="../../favicon.ico">    TODO : doplnit favicon-->
+<link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
 
 <title>Administrace | Analytický a reportovací nástroj</title>
 
@@ -39,7 +39,7 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="administrace">Administrace</a></li>
+					<li><a href="logout">Logout</a></li>
 				</ul>
 			</div>
 		</div>
