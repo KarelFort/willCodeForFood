@@ -1,0 +1,34 @@
+{
+    "data": [
+        {
+            "adevice": "iPhone",
+            "percentage": "45.4545",
+            "count": "10"
+        },
+        {
+            "adevice": "iPad",
+            "percentage": "18.1818",
+            "count": "4"
+        },
+        {
+            "adevice": "SAMSUNGGTI9505",
+            "percentage": "18.1818",
+            "count": "4"
+        },
+        {
+            "adevice": "WindowsPhone",
+            "percentage": "9.0909",
+            "count": "2"
+        },
+        {
+            "adevice": "Android",
+            "percentage": "4.5455",
+            "count": "1"
+        },
+        {
+            "adevice": "SAMSUNGGTI8552B",
+            "percentage": "4.5455",
+            "count": "1"
+        }
+    ]
+}
