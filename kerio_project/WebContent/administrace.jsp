@@ -59,7 +59,7 @@
 
 				<br>
 
-				<table id="tabulka" class="display" cellspacing="0" width="100%">
+				<table id="table" class="display" cellspacing="0" width="100%">
 					<thead>
 						<tr>
 							<th>Dotaz</th>
@@ -112,15 +112,15 @@
 		</div>
 	</div>
 
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="js/lib/jquery.min.js"></script>
+	<script src="js/lib/bootstrap.min.js"></script>
 	<script type="text/javascript" language="javascript"
-		src="js/jquery.dataTables.min.js"></script>
+		src="js/lib/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" language="javascript"
-		src="js/dataTables.bootstrap.js"></script>
+		src="js/lib/dataTables.bootstrap.js"></script>
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function() {
-			$('#tabulka').dataTable();
+			$('#table').dataTable();
 		});
 	</script>
 </body>
