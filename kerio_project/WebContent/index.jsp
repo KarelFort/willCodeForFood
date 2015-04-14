@@ -115,7 +115,7 @@
 
 			<h4>Date range</h4>
 
-			<div class="col-lg-6" style="padding: 0px">
+			<div style="padding: 0px">
 				<div class="input-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
 					<input type="text" class="form-control" id="datepicker-from"
 						style="cursor: pointer; background-color: white"
@@ -144,9 +144,10 @@
 			</div>
 			<!-- /.col-lg-6 -->
 			<br>
-			<button type="button" class="btn btn-primary" id="btn-execute">Execute
-				query</button>
-
+			<div>
+				<button type="button" class="btn btn-primary" id="btn-execute">Execute
+					query</button>
+			</div>
 		</div>
 
 		<br>
