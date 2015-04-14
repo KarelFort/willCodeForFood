@@ -10,7 +10,7 @@ public class Driver {
 	//set connection details
 	private static String dbURL = "jdbc:mysql://localhost:3306/kerio";
 	private static String login = "root";
-	private static String password = "password";
+	private static String password = "rencha987";
 
 	public static void main(String[] args){
 

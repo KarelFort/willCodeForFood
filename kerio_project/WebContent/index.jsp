@@ -1,8 +1,8 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,6 +14,7 @@
 <link href="css/dashboard.css" rel="stylesheet" type="text/css">
 <link href="css/dataTables.bootstrap.css" rel="stylesheet"
 	type="text/css">
+<link href="css/styl.css" rel="stylesheet" type="text/css">
 
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -38,15 +39,21 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
+				<a class="navbar-brand" href="index.jsp#"> <img
+					src="img/logo_v2.png" alt="ClientStatistics Home" width="273"
+					height="34" border="0" /></a>
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 					aria-controls="navbar">
 					<span class="sr-only">Toggle navigation</span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
+
 				</button>
-				<a class="navbar-brand" href="index">Analytický a reportovací
-					nástroj produktu Kerio Connect</a>
+
+				<!-- 				<a class="navbar-brand" href="index">Analytický a reportovací -->
+				<!-- 					nástroj produktu Kerio Connect</a> -->
+
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -79,15 +86,22 @@
 
 				<p>Poslední aktualizace 12. 4. 2015 v 16:55</p>
 
-
 				<h1 class="page-header">Mobilní zařízení</h1>
 
-				<h4>Popis dotazu</h4>
-				<h5 id="popis"></h5>
-				<br />
-
-				<h4>SQL dotaz</h4>
-				<h5 id="dotaz" class="jumbotron"></h5>
+				<div id="collapseH" class="collapse in">
+					<ul class="nav nav-tabs" id="ic_tabs">
+						<li class="active"><a href="#tab1" data-toggle="tab">Popis</a></li>
+						<li><a href="#tab2" data-toggle="tab">SQL</a></li>
+					</ul>
+					<div id="ic_tabsContent" class="tab-content">
+						<div class="tab-pane fade in active" id="tab1">
+							<h5 id="popis"></h5>
+						</div>
+						<div class="tab-pane fade" id="tab2">
+							<h5 id="dotaz"></h5>
+						</div>
+					</div>
+				</div>
 
 				<br>
 				<h4>Tabulka</h4>
