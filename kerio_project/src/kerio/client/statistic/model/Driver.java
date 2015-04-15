@@ -1,5 +1,6 @@
 package kerio.client.statistic.model;
 
+import java.io.PrintWriter;
 import java.sql.*;
 
 import org.json.JSONArray;
@@ -10,7 +11,7 @@ public class Driver {
 	//set connection details
 	private static String dbURL = "jdbc:mysql://localhost:3306/kerio";
 	private static String login = "root";
-	private static String password = "rencha987";
+	private static String password = "password";
 
 	public static void main(String[] args){
 
@@ -41,15 +42,17 @@ public class Driver {
 				jObj.put("percentage", perc_json);
 
 				jArray.put(jObj);
-
 			}
 
+/* s nasledujicim formatem zapisu se bude v js kodu hure pracovat */
+//			JSONObject jObjDevice = new JSONObject();
+//			jObjDevice.put("data", jArray);
+//			System.out.println(jObjDevice);
 
-			JSONObject jObjDevice = new JSONObject();
-			jObjDevice.put("data", jArray);
-
-			System.out.println(jObjDevice);
-
+			PrintWriter writer = new PrintWriter("WebContent/data/result.json", "UTF-8");
+			writer.println(jArray);
+			writer.close();
+			
 		}catch(Exception exc){
 			exc.printStackTrace();
 		}
