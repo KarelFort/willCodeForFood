@@ -31,7 +31,6 @@ var color = d3.scale.category20c();
         }
     ]
 
-//var data = d3.json("data/result.json", function(error, root) {});
 
 var vis = d3.select('#chart').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
 var pie = d3.layout.pie().value(function(d){return d.value;});

@@ -44,13 +44,13 @@ public class Driver {
 				jArray.put(jObj);
 			}
 
-/* s nasledujicim formatem zapisu se bude v js kodu hure pracovat */
-//			JSONObject jObjDevice = new JSONObject();
-//			jObjDevice.put("data", jArray);
-//			System.out.println(jObjDevice);
+			// with this format communicates datatables.js
+			JSONObject jObjDevice = new JSONObject();
+			jObjDevice.put("data", jArray);
+			System.out.println(jObjDevice);
 
 			PrintWriter writer = new PrintWriter("WebContent/data/result.json", "UTF-8");
-			writer.println(jArray);
+			writer.println(jObjDevice);
 			writer.close();
 			
 		}catch(Exception exc){

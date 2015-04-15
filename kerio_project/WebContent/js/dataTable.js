@@ -13,7 +13,7 @@ $(document).ready(function() {
 				"serverSide": false,
 				"ajax": "data/result.json",
 				"columns": [
-				            { "data": "adevice" },
+				            { "data": "device" },
 				            { "data": "percentage" },
 				            { "data": "count" }
 				            ],
