@@ -8,7 +8,7 @@
 
 <link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
 
-<title>Administrace | Analytický a reportovací nástroj</title>
+<title>Administration | ClientStatistics - Kerio Connect</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="css/dashboard.css" rel="stylesheet" type="text/css">
@@ -27,6 +27,9 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
+				<a class="navbar-brand" href="index"> <img
+						src="img/logo_v2.png" alt="ClientStatistics Home" width="273"
+						height="34" border="0" /></a>
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 					aria-controls="navbar">
@@ -34,8 +37,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index">Analytický a
-					reportovací nástroj produktu Kerio Connect</a>
+
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
