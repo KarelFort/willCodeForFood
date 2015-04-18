@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--  <link rel="icon" href="../../favicon.ico">    TODO : doplnit favicon-->
+<link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
 
 <title>ClientStatistics - Kerio Connect</title>
 
