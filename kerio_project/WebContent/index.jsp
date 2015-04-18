@@ -61,7 +61,7 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="administrace">Login</a></li>
+					<li><a href="administration">Admin</a></li>
 				</ul>
 			</div>
 		</div>

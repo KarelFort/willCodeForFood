@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Administrace
  */
-@WebServlet("/administrace")
-public class Administrace extends HttpServlet {
+@WebServlet("/administration")
+public class Administration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Administrace() {
+    public Administration() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,7 @@ public class Administrace extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("administrace.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("administration.jsp");
 		dispatcher.forward(request, response);
 	}
 
