@@ -8,7 +8,7 @@
 
 <link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
 
-<title>Administration | ClientStatistics - Kerio Connect</title>
+<title>Add query | ClientStatistics - Kerio Connect</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="css/dashboard.css" rel="stylesheet" type="text/css">
@@ -62,13 +62,23 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h1 class="page-header">Queries edit</h1>
-				<p>Choose query on the left to editing. </p> 
 
 				<h1 class="page-header">Add query</h1>
-				<a href="add-query">
-					<button type="button" class="btn btn-primary">Add query</button>
-				</a>
+
+				<form action="add-query" method="post" >
+						<label>Name:</label>  (required)
+						<input type="text" name="name" class="form-control" required> 
+						
+						<label>Description:</label>  (required)
+						<input type="text" name="description" class="form-control" required>
+						 
+						<label>Query:</label>  (required)
+						<input type="text" name="query" class="form-control" required> 
+						
+						<input type="submit" value="add query" class="btn">
+				</form>		
+
+	
 			</div>
 		</div>
 	</div>
