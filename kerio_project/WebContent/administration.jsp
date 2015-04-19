@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="shortcut icon" href="img/favicon.ico"
+	type="image/vnd.microsoft.icon" />
 
 <title>Administration | ClientStatistics - Kerio Connect</title>
 
@@ -20,16 +21,15 @@
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->  
+    <![endif]-->
 </head>
 
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="index"> <img
-						src="img/logo_v2.png" alt="ClientStatistics Home" width="273"
-						height="34" border="0" /></a>
+				<a class="navbar-brand" href="index"> <img src="img/logo_v2.png"
+					alt="ClientStatistics Home" width="273" height="34" border="0" /></a>
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 					aria-controls="navbar">
@@ -37,8 +37,8 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-
 			</div>
+
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="administration">Queries edit</a></li>
@@ -62,8 +62,12 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+				<!-- ze session vezme zpravu napr zda se operace zdarila ci ne-->
+				<p class="alert-${requestScope.typZpravy}">${requestScope.zprava}</p>
+
 				<h1 class="page-header">Queries edit</h1>
-				<p>Choose query on the left to editing. </p> 
+				<p>Choose query on the left to editing.</p>
 
 				<h1 class="page-header">Add query</h1>
 				<a href="add-query">
