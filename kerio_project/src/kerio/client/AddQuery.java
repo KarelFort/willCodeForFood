@@ -37,11 +37,11 @@ public class AddQuery extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setAttribute("zprava", "Uživatel byl úspěšně aktualizován.");
-		request.setAttribute("typZpravy", "success");	
+			
+		request.getSession().setAttribute("message", "Query added succesfully");
+		request.getSession().setAttribute("message_type", "success");	
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("administration.jsp");
-		dispatcher.forward(request, response);
+		response.sendRedirect("administration");
 	}
 
 }

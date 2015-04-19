@@ -63,8 +63,8 @@
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-				<!-- ze session vezme zpravu napr zda se operace zdarila ci ne-->
-				<p class="alert-${requestScope.typZpravy}">${requestScope.zprava}</p>
+				<!-- displaying message added in GeneralFilter-->
+				<p class="alert-${requestScope.message_type}">${requestScope.message}</p>
 
 				<h1 class="page-header">Queries edit</h1>
 				<p>Choose query on the left to editing.</p>

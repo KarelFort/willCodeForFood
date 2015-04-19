@@ -15,21 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Servlet Filter implementation class GeneralFilter
  */
-@WebFilter(dispatcherTypes = {
-				DispatcherType.REQUEST, 
-				DispatcherType.FORWARD, 
-				DispatcherType.INCLUDE, 
-				DispatcherType.ERROR
-		}
-					, urlPatterns = { "/*" })
+@WebFilter(dispatcherTypes = { DispatcherType.REQUEST, DispatcherType.FORWARD,
+		DispatcherType.INCLUDE, DispatcherType.ERROR }, urlPatterns = { "/*" })
 public class GeneralFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public GeneralFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public GeneralFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -41,23 +36,25 @@ public class GeneralFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
 
-		//pretypovani
-				HttpServletRequest req = (HttpServletRequest) request;
-				
-		// pokud mam v sessne nejakou zpravu, pridam ji vcetne typu do requestu
-				// a necham v jsp zobrazit
-				if (req.getSession().getAttribute("zprava") != null) {
-					String zprava = req.getSession().getAttribute("zprava").toString();
-					String typZpravy = req.getSession().getAttribute("typZpravy").toString();
+		// changing type of request
+		HttpServletRequest req = (HttpServletRequest) request;
 
-					req.setAttribute("zprava", zprava);
-					req.setAttribute("typZpravy", typZpravy);
-					
-					req.getSession().removeAttribute("zprava");
-					req.getSession().removeAttribute("typZpravy");
-				}
+		// if I have any meesage in session, I add it to the request and remove from session
+		// message will be displayed in JSP
+		if (req.getSession().getAttribute("message") != null) {
+			String message = req.getSession().getAttribute("message").toString();
+			String message_type = req.getSession().getAttribute("message_type")
+					.toString();
+
+			req.setAttribute("message", message);
+			req.setAttribute("message_type", message_type);
+
+			req.getSession().removeAttribute("message");
+			req.getSession().removeAttribute("message_type");
+		}
 
 		chain.doFilter(request, response);
 	}
