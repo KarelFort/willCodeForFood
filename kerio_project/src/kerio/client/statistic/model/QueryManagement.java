@@ -7,19 +7,24 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class QueryManagement {
 
 	// set connection details
-	private static String dbURL = "jdbc:mysql://localhost:3306/kerio";
-	private static String login = "root";
-	private static String password = "password";
-	private static Statement stmnt;
-	private static String tableCols = "statement, name, info";
-	private static String dbName = "kerio_all.clients_sql_statements";
+	private String dbURL = "jdbc:mysql://localhost:3306/kerio";
+	private String login = "root";
+	private String password = "password";
+	private Statement stmnt;
+	private String tableCols = "statement, name, info";
+	private String dbName = "client_statistics.client_sql_statements";
 
-	public static void init() {
+	public QueryManagement(){
+		init();
+	}
+
+	public void init() {
 		try {
 			Connection newConnection = DriverManager.getConnection(dbURL,
 					login, password);
@@ -30,19 +35,21 @@ public class QueryManagement {
 		}
 	}
 
-	public static void addQuery(String statement, String name, String info ) {
-		String addStatement = "INSERT INTO " + dbName
-				+ " (" +tableCols+ ") VALUES ( '" + statement + "', '" +name + "', '" + info + "')";
+	public void addQuery(String statement, String name, String info) {
+		String addStatement = "INSERT INTO " + dbName + " (" + tableCols
+				+ ") VALUES ( '" + statement + "', '" + name + "', '" + info
+				+ "')";
 		try {
 			stmnt.executeUpdate(addStatement);
+			System.out.println("nastaveno!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public static String[] getQuery(int id) {
-		String getStatement = "SELECT " +tableCols+ " FROM " + dbName
+	public String[] getQuery(int id) {
+		String getStatement = "SELECT " + tableCols + " FROM " + dbName
 				+ " WHERE ID=" + id;
 		ResultSet result;
 		String[] resultArray = null;
@@ -64,8 +71,7 @@ public class QueryManagement {
 		return resultArray;
 	}
 
-	
-	public static List<String> getAllQueries() {
+	public List<String> getAllQueries() {
 		String getStatement = "SELECT STATEMENT FROM " + dbName;
 		ResultSet result;
 		List<String> resultList = new ArrayList<String>();
@@ -81,10 +87,12 @@ public class QueryManagement {
 		return resultList;
 	}
 
+	public void updateQuery(int id, String statement, String name,
+			String info) {
 
-	public static void updateQuery(int id, String statement, String name, String info) {
-			
-		String updateStatement = "UPDATE " +dbName+ " set STATEMENT = '" +statement+ "', NAME = '" +name+"', INFO = '" +info+ "' WHERE id= "+id;
+		String updateStatement = "UPDATE " + dbName + " set STATEMENT = '"
+				+ statement + "', NAME = '" + name + "', INFO = '" + info
+				+ "' WHERE id= " + id;
 		try {
 			stmnt.executeUpdate(updateStatement);
 		} catch (SQLException e) {
@@ -92,6 +100,5 @@ public class QueryManagement {
 			e.printStackTrace();
 		}
 	}
-	
 
 }
