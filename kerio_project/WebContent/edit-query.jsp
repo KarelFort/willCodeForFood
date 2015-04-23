@@ -6,10 +6,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="shortcut icon" href="img/favicon.ico"
-	type="image/vnd.microsoft.icon" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
 
-<title>Administration | ClientStatistics - Kerio Connect</title>
+<title>Add query | ClientStatistics - Kerio Connect</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="css/dashboard.css" rel="stylesheet" type="text/css">
@@ -21,15 +20,16 @@
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <![endif]-->  
 </head>
 
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="index"> <img src="img/logo_v2.png"
-					alt="ClientStatistics Home" width="273" height="34" border="0" /></a>
+				<a class="navbar-brand" href="index"> <img
+						src="img/logo_v2.png" alt="ClientStatistics Home" width="273"
+						height="34" border="0" /></a>
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 					aria-controls="navbar">
@@ -37,8 +37,8 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-			</div>
 
+			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="administration">Queries edit</a></li>
@@ -50,8 +50,8 @@
 	</nav>
 
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
+		<div class="row">	
+		<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
 					<li class="active"><a href="edit-query">Mobile devices</a></li>
 					<li><a href="#">SQL dotaz 2</a></li>
@@ -60,19 +60,23 @@
 					<li><a href="#">SQL dotaz 5</a></li>
 					<li><a href="#">...</a></li>
 				</ul>
-			</div>
+			</div>		
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-				<!-- displaying message added in GeneralFilter-->
-				<p class="alert-${requestScope.message_type}">${requestScope.message}</p>
+				<h1 class="page-header">Edit query</h1>
 
-				<h1 class="page-header">Queries edit</h1>
-				<p>Choose query on the left to editing.</p>
-
-				<h1 class="page-header">Add query</h1>
-				<a href="add-query">
-					<button type="button" class="btn btn-primary">Add query</button>
-				</a>
+				<form action="edit-query" method="post" >
+						<label>Name:</label>  (required)
+						<input type="text" name="name" class="form-control" required> 
+						
+						<label>Description:</label>  (required)
+						<input type="text" name="info" class="form-control" required>
+						 
+						<label>Query:</label>  (required)
+						<input type="text" name="statement" class="form-control" required> 
+						
+						<input type="submit" value="add query" class="btn">
+				</form>			
 			</div>
 		</div>
 	</div>
