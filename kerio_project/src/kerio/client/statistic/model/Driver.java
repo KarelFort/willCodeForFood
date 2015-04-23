@@ -16,7 +16,7 @@ public class Driver {
 	public static void main(String[] args){
 
 		try{
-
+			
 			Connection newConnection = DriverManager.getConnection(dbURL, login, password);
 
 			Statement stmnt = newConnection.createStatement();

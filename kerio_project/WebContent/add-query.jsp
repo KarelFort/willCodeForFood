@@ -70,10 +70,10 @@
 						<input type="text" name="name" class="form-control" required> 
 						
 						<label>Description:</label>  (required)
-						<input type="text" name="description" class="form-control" required>
+						<input type="text" name="info" class="form-control" required>
 						 
 						<label>Query:</label>  (required)
-						<input type="text" name="query" class="form-control" required> 
+						<input type="text" name="statement" class="form-control" required> 
 						
 						<input type="submit" value="add query" class="btn">
 				</form>		

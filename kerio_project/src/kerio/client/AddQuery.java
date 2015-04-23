@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kerio.client.statistic.model.QueryManagement;
+
+
+
 /**
  * Servlet implementation class AddQuery
  */
@@ -37,6 +41,12 @@ public class AddQuery extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String statement = (String) request.getParameter("statement");
+		String name = (String) request.getParameter("name");
+		String info = (String) request.getParameter("info");
+		
+		QueryManagement queries = new QueryManagement();
+		queries.addQuery(statement, name, info);
 			
 		request.getSession().setAttribute("message", "Query added succesfully");
 		request.getSession().setAttribute("message_type", "success");	

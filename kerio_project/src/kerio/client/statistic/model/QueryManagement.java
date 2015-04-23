@@ -13,12 +13,14 @@ import java.util.List;
 public class QueryManagement {
 
 	// set connection details
-	private String dbURL = "jdbc:mysql://localhost:3306/kerio";
+	private String dbURL = "jdbc:mysql://localhost:3306/client_statistics";
 	private String login = "root";
-	private String password = "password";
+	private String password = "";
 	private Statement stmnt;
 	private String tableCols = "statement, name, info";
 	private String dbName = "client_statistics.client_sql_statements";
+	
+	
 
 	public QueryManagement(){
 		init();
@@ -26,6 +28,8 @@ public class QueryManagement {
 
 	public void init() {
 		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			
 			Connection newConnection = DriverManager.getConnection(dbURL,
 					login, password);
 			stmnt = newConnection.createStatement();
@@ -38,10 +42,9 @@ public class QueryManagement {
 	public void addQuery(String statement, String name, String info) {
 		String addStatement = "INSERT INTO " + dbName + " (" + tableCols
 				+ ") VALUES ( '" + statement + "', '" + name + "', '" + info
-				+ "')";
+				+ "')";		
 		try {
 			stmnt.executeUpdate(addStatement);
-			System.out.println("nastaveno!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
