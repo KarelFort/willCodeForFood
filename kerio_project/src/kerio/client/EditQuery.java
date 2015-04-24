@@ -2,6 +2,7 @@ package kerio.client;
 
 import java.io.IOException;
 
+import kerio.data.Query;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +36,7 @@ public class EditQuery extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		QueryManagement queries = new QueryManagement();
-		String[] gueryToEdit = queries.getQuery(id);
+		Query gueryToEdit = queries.getQuery(id);
 		
 		request.setAttribute("gueryToEdit", gueryToEdit);
 		

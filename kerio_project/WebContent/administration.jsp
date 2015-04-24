@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,9 +23,10 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>   
+  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>   
+
 </head>
 
 <body>
@@ -63,8 +65,8 @@
 						</c:when>
 
 						<c:otherwise>
-							<c:forEach items="${requestScope.AllProducts}" var="product">
-								<li><a href="edit-query?id=2">Mobile devices</a></li>
+							<c:forEach items="${requestScope.allQueries}" var="query">
+								<li><a href="edit-query?id=${query.id}">${query.name}</a></li>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>			
