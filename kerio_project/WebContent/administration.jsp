@@ -53,7 +53,7 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="edit-query">Mobile devices</a></li>
+					<li class="active"><a href="edit-query?id=2">Mobile devices</a></li>
 					<li><a href="#">SQL dotaz 2</a></li>
 					<li><a href="#">SQL dotaz 3</a></li>
 					<li><a href="#">SQL dotaz 4</a></li>

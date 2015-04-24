@@ -64,18 +64,19 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 				<h1 class="page-header">Edit query</h1>
-
 				<form action="edit-query" method="post" >
 						<label>Name:</label>  (required)
-						<input type="text" name="name" class="form-control" required> 
+						<input type="text" name="name" class="form-control" value="${gueryToEdit[2]}" required> 
 						
 						<label>Description:</label>  (required)
-						<input type="text" name="info" class="form-control" required>
+						<input type="text" name="info" class="form-control" value="${gueryToEdit[3]}" required>
 						 
 						<label>Query:</label>  (required)
-						<input type="text" name="statement" class="form-control" required> 
-						
-						<input type="submit" value="add query" class="btn">
+						<input type="text" name="statement" class="form-control" value="${gueryToEdit[1]}" required> 					
+
+						<input type="hidden" name="id" value="${gueryToEdit[0]}" />
+		
+						<input type="submit" value="edit query" class="btn">
 				</form>			
 			</div>
 		</div>

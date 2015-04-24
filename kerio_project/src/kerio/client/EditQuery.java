@@ -35,7 +35,9 @@ public class EditQuery extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		QueryManagement queries = new QueryManagement();
-		queries.getQuery(id);
+		String[] gueryToEdit = queries.getQuery(id);
+		
+		request.setAttribute("gueryToEdit", gueryToEdit);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("edit-query.jsp");
 		dispatcher.forward(request, response);

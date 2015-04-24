@@ -50,9 +50,9 @@ public class QueryManagement {
 			e.printStackTrace();
 		}
 	}
-
+// TODOmozna lepe predelat navratovou hodnotu na objekt - prehlednejsi prace v JSP. Frantisek 
 	public String[] getQuery(int id) {
-		String getStatement = "SELECT " + tableCols + " FROM " + dbName
+		String getStatement = "SELECT id," + tableCols + " FROM " + dbName
 				+ " WHERE ID=" + id;
 		ResultSet result;
 		String[] resultArray = null;
