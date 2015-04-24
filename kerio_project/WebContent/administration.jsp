@@ -22,6 +22,9 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>   
 </head>
 
 <body>
@@ -53,12 +56,18 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="edit-query?id=2">Mobile devices</a></li>
-					<li><a href="#">SQL dotaz 2</a></li>
-					<li><a href="#">SQL dotaz 3</a></li>
-					<li><a href="#">SQL dotaz 4</a></li>
-					<li><a href="#">SQL dotaz 5</a></li>
-					<li><a href="#">...</a></li>
+					<c:choose>
+						<c:when test="${fn:length(allQueries) == 0}">
+							<p class="alert-warning">V této kategorii nejsou momentálně
+								žádné položky.</p>
+						</c:when>
+
+						<c:otherwise>
+							<c:forEach items="${requestScope.AllProducts}" var="product">
+								<li><a href="edit-query?id=2">Mobile devices</a></li>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>			
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
