@@ -77,6 +77,13 @@
 						<input type="hidden" name="id" value="${gueryToEdit.id}" />
 		
 						<input type="submit" value="edit query" class="btn">
+				</form>		
+				<br><br><br><br>
+				<form action="delete-query" method="post" >		
+
+						<input type="hidden" name="id" value="${gueryToEdit.id}" />
+		
+						<input type="submit" value="delete this query" class="btn btn-danger">
 				</form>			
 			</div>
 		</div>

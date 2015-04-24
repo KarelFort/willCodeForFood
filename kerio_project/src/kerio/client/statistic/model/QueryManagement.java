@@ -52,7 +52,7 @@ public class QueryManagement {
 			e.printStackTrace();
 		}
 	}
-// TODOmozna lepe predelat navratovou hodnotu na objekt - prehlednejsi prace v JSP. Frantisek 
+
 	public Query getQuery(int id) {
 		Query query = new Query();
 		
@@ -75,6 +75,17 @@ public class QueryManagement {
 			e.printStackTrace();
 		}
 		return query;
+	}
+	
+	public void deleteQuery(int id) {		
+		String deleteStatement = "DELETE FROM " + dbName + " WHERE ID=" + id;
+		
+		try {
+			stmnt.executeUpdate(deleteStatement);					
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public List<Query> getAllQueries() {
