@@ -1,8 +1,8 @@
 package kerio.client;
 
 import java.io.IOException;
-import java.util.List;
 
+import kerio.data.Query;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,19 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kerio.client.statistic.model.QueryManagement;
-import kerio.data.Query;
+
+
 
 /**
- * Servlet implementation class Administrace
+ * Servlet implementation class EditQuery
  */
-@WebServlet("/administration")
-public class Administration extends HttpServlet {
+@WebServlet("/edit-query")
+public class EditQuery extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Administration() {
+    public EditQuery() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +33,14 @@ public class Administration extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		QueryManagement queries = new QueryManagement();
-		List<Query> allQueries = queries.getAllQueries();
+		int id = Integer.parseInt(request.getParameter("id"));
 		
-		request.setAttribute("allQueries", allQueries);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("administration.jsp");
+		QueryManagement queries = new QueryManagement();
+		Query gueryToEdit = queries.getQuery(id);
+		
+		request.setAttribute("gueryToEdit", gueryToEdit);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("edit-query.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -44,7 +48,18 @@ public class Administration extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		String statement = (String) request.getParameter("statement");
+		String name = (String) request.getParameter("name");
+		String info = (String) request.getParameter("info");
+			
+		QueryManagement queries = new QueryManagement();
+		queries.updateQuery(id, statement, name, info);
+			
+		request.getSession().setAttribute("message", "Query edited succesfully");
+		request.getSession().setAttribute("message_type", "success");	
 		
+		response.sendRedirect("administration");
 	}
 
 }

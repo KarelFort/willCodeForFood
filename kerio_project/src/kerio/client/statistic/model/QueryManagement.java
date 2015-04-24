@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import kerio.data.Query;
+
 public class QueryManagement {
 
 	// set connection details
@@ -50,44 +52,55 @@ public class QueryManagement {
 			e.printStackTrace();
 		}
 	}
-
-	public String[] getQuery(int id) {
-		String getStatement = "SELECT " + tableCols + " FROM " + dbName
+// TODOmozna lepe predelat navratovou hodnotu na objekt - prehlednejsi prace v JSP. Frantisek 
+	public Query getQuery(int id) {
+		Query query = new Query();
+		
+		String getStatement = "SELECT * FROM " + dbName
 				+ " WHERE ID=" + id;
 		ResultSet result;
-		String[] resultArray = null;
 		try {
 			result = stmnt.executeQuery(getStatement);
 			ResultSetMetaData rsmd = result.getMetaData();
 			int col = rsmd.getColumnCount();
-			resultArray = new String[col];
-			while (result.next()) {
-				for (int i = 0; i < col; i++) {
-					resultArray[i] = result.getString(rsmd
-							.getColumnLabel(i + 1));
-				}
-			}
+			result.next();
+			
+			query.setId(result.getInt("id"));
+			query.setName(result.getString("name"));
+			query.setStatement(result.getString("statement"));
+			query.setInfo(result.getString("info"));
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return resultArray;
+		return query;
 	}
 
-	public List<String> getAllQueries() {
-		String getStatement = "SELECT STATEMENT FROM " + dbName;
+	public List<Query> getAllQueries() {
+		List<Query> allQueries = new ArrayList<Query>();
+		
+		String getStatement = "SELECT * FROM " + dbName;
 		ResultSet result;
-		List<String> resultList = new ArrayList<String>();
+		
 		try {
 			result = stmnt.executeQuery(getStatement);
 			while (result.next()) {
-				resultList.add(result.getString("STATEMENT"));
+				Query query = new Query();
+
+				query.setId(result.getInt("id"));
+				query.setName(result.getString("name"));
+				query.setStatement(result.getString("statement"));
+				query.setInfo(result.getString("info"));
+
+				allQueries.add(query);
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return resultList;
+		return allQueries;
 	}
 
 	public void updateQuery(int id, String statement, String name,

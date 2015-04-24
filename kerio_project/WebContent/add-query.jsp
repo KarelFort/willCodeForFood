@@ -50,17 +50,7 @@
 	</nav>
 
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					<li class="active"><a href="query-edit">Mobile devices</a></li>
-					<li><a href="#">SQL dotaz 2</a></li>
-					<li><a href="#">SQL dotaz 3</a></li>
-					<li><a href="#">SQL dotaz 4</a></li>
-					<li><a href="#">SQL dotaz 5</a></li>
-					<li><a href="#">...</a></li>
-				</ul>
-			</div>
+		<div class="row">			
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 				<h1 class="page-header">Add query</h1>
