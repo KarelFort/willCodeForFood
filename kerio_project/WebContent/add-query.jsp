@@ -67,13 +67,8 @@
 						
 						<input type="submit" value="add query" class="btn">
 				</form>		
-
-	
 			</div>
 		</div>
 	</div>
-
-	<script src="js/lib/jquery.min.js"></script>
-	<script src="js/lib/bootstrap.min.js"></script>
 </body>
 </html>

@@ -25,7 +25,6 @@ public class Administration extends HttpServlet {
      */
     public Administration() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

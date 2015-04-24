@@ -60,8 +60,7 @@
 				<ul class="nav nav-sidebar">
 					<c:choose>
 						<c:when test="${fn:length(allQueries) == 0}">
-							<p class="alert-warning">V této kategorii nejsou momentálně
-								žádné položky.</p>
+							<p class="alert-warning">Nenalezeny žádné dotazy.</p>
 						</c:when>
 
 						<c:otherwise>
@@ -79,7 +78,7 @@
 
 				<h1 class="page-header">Queries edit</h1>
 				<p>Choose query on the left to editing.</p>
-
+				<br>
 				<h1 class="page-header">Add query</h1>
 				<a href="add-query">
 					<button type="button" class="btn btn-primary">Add query</button>
@@ -87,8 +86,5 @@
 			</div>
 		</div>
 	</div>
-
-	<script src="js/lib/jquery.min.js"></script>
-	<script src="js/lib/bootstrap.min.js"></script>
 </body>
 </html>
