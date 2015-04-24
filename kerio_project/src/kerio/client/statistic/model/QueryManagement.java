@@ -20,9 +20,7 @@ public class QueryManagement {
 	private String password = "";
 	private Statement stmnt;
 	private String tableCols = "statement, name, info";
-	private String dbName = "client_statistics.client_sql_statements";
-	
-	
+	private String dbName = "client_statistics.client_sql_statements";	
 
 	public QueryManagement(){
 		init();
@@ -35,12 +33,16 @@ public class QueryManagement {
 			Connection newConnection = DriverManager.getConnection(dbURL,
 					login, password);
 			stmnt = newConnection.createStatement();
-
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
-
+/**
+ * Insert new query to database
+ * @param statement
+ * @param name
+ * @param info
+ */
 	public void addQuery(String statement, String name, String info) {
 		String addStatement = "INSERT INTO " + dbName + " (" + tableCols
 				+ ") VALUES ( '" + statement + "', '" + name + "', '" + info
@@ -48,11 +50,15 @@ public class QueryManagement {
 		try {
 			stmnt.executeUpdate(addStatement);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * returns one query (identified by ID) as an object with properties id, name, statement and info
+	 * @param id
+	 * @return
+	 */
 	public Query getQuery(int id) {
 		Query query = new Query();
 		
@@ -61,8 +67,6 @@ public class QueryManagement {
 		ResultSet result;
 		try {
 			result = stmnt.executeQuery(getStatement);
-			ResultSetMetaData rsmd = result.getMetaData();
-			int col = rsmd.getColumnCount();
 			result.next();
 			
 			query.setId(result.getInt("id"));
@@ -71,29 +75,34 @@ public class QueryManagement {
 			query.setInfo(result.getString("info"));
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return query;
 	}
 	
+	/**
+	 * delete querz identified by ID
+	 * @param id
+	 */
 	public void deleteQuery(int id) {		
 		String deleteStatement = "DELETE FROM " + dbName + " WHERE ID=" + id;
 		
 		try {
 			stmnt.executeUpdate(deleteStatement);					
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * returns all queries from database as a list of Query objects
+	 * @return
+	 */
 	public List<Query> getAllQueries() {
 		List<Query> allQueries = new ArrayList<Query>();
 		
 		String getStatement = "SELECT * FROM " + dbName;
-		ResultSet result;
-		
+		ResultSet result;		
 		try {
 			result = stmnt.executeQuery(getStatement);
 			while (result.next()) {
@@ -105,15 +114,20 @@ public class QueryManagement {
 				query.setInfo(result.getString("info"));
 
 				allQueries.add(query);
-
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return allQueries;
 	}
 
+	/**
+	 * updates name, statement and info of query idetified by ID
+	 * @param id
+	 * @param statement
+	 * @param name
+	 * @param info
+	 */
 	public void updateQuery(int id, String statement, String name,
 			String info) {
 
@@ -123,7 +137,6 @@ public class QueryManagement {
 		try {
 			stmnt.executeUpdate(updateStatement);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

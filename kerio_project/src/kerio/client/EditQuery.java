@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import kerio.client.statistic.model.QueryManagement;
 
-
-
 /**
  * Servlet implementation class EditQuery
  */
@@ -26,7 +24,6 @@ public class EditQuery extends HttpServlet {
      */
     public EditQuery() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

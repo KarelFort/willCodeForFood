@@ -80,7 +80,6 @@
 				</form>		
 				<br><br><br><br>
 				<form action="delete-query" method="post" >		
-
 						<input type="hidden" name="id" value="${gueryToEdit.id}" />
 		
 						<input type="submit" value="delete this query" class="btn btn-danger">
@@ -88,8 +87,5 @@
 			</div>
 		</div>
 	</div>
-
-	<script src="js/lib/jquery.min.js"></script>
-	<script src="js/lib/bootstrap.min.js"></script>
 </body>
 </html>

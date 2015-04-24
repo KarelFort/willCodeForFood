@@ -34,8 +34,7 @@ public class DeleteQuery extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		int id = Integer.parseInt(request.getParameter("id"));
 			
 		QueryManagement queries = new QueryManagement();
