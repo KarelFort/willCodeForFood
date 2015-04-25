@@ -1,59 +1,141 @@
-var w = 500;
-var h = 500;
-var r = h/2;
-var color = d3.scale.category20c();
+(function(d3) {
+	'use strict';
+
+	var width = 450;
+	var height = 450;
+	var donutWidth = 100;
+	var radius = Math.min(width, height) / 2;
+	var legendRectSize = 18;			//size of colored squares
+	var legendSpacing = 4;					
+
+	var color = d3.scale.category20c();	//color scale
+
+	var svg = d3.select('#chart')		//retrieve the DOM element
+	.append('svg')						//append an svg element to the element we've selected
+	.attr('width', width)
+	.attr('height', height)
+	.append('g')
+	.attr('transform', 'translate(' + (width / 2) + 
+			',' + (height / 2) + ')');
+
+	var arc = d3.svg.arc()				//define radius, which determines the size of the overall chart
+	.innerRadius(radius - donutWidth)  	//create donut hole
+	.outerRadius(radius);
+
+	var pie = d3.layout.pie()			//start and end angles of the segments
+	.value(function(d) { return d.count; })
+	.sort(null);
+
+	var tooltip = d3.select('#chart')           
+	.append('div')                            
+	.attr('class', 'chart_tooltip');             
+
+	tooltip.append('div')                      
+	.attr('class', 'device');                 
+
+	tooltip.append('div')                      
+	.attr('class', 'count');                
+
+	tooltip.append('div')                      
+	.attr('class', 'percent');    
 
 
- var data =  [
-        {
-            "label": "iPhone",
-            "value": "10"
-        },
-        {
-            "label": "iPad",
-            "value": "4"
-        },
-        {
-            "label": "SAMSUNGGTI9505",
-            "value": "4"
-        },
-        {
-            "label": "WindowsPhone",
-            "value": "2"
-        },
-        {
-            "label": "Android",
-            "value": "1"
-        },
-        {
-            "label": "SAMSUNGGTI8552B",
-            "value": "1"
-        }
-    ]
+	d3.json('data/chart_result.json', function(error, dataset) {
+		dataset.forEach(function(d) {
+			d.count = +d.count;
+			d.enabled = true;
+		});
 
 
-var vis = d3.select('#chart').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
-var pie = d3.layout.pie().value(function(d){return d.value;});
+		var path = svg.selectAll('path')
+		.data(pie(dataset))
+		.enter()
+		.append('path')
+		.attr('d', arc)
+		.attr('fill', function(d, i) { 
+			return color(d.data.device);
+		})
+		.each(function(d) { this._current = d; });
 
-// declare an arc generator function
-var arc = d3.svg.arc().outerRadius(r);
+		path.on('mouseover', function(d) {				//mouseover event handler
+			var total = d3.sum(dataset.map(function(d) {
+				return (d.enabled) ? d.count : 0;
+			}));
+			var percent = Math.round(1000 * d.data.count / total) / 10;
+			tooltip.select('.device').html(d.data.device);
+			tooltip.select('.count').html(d.data.count); 
+			tooltip.select('.percent').html(percent + '%'); 
+			tooltip.style('display', 'block');
+		});
 
-// select paths, use arc generator to draw
-var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
-arcs.append("svg:path")
-    .attr("fill", function(d, i){
-        return color(i);
-    })
-    .attr("d", function (d) {
-        // log the result of the arc generator to show how cool it is :)
-        console.log(arc(d));
-        return arc(d);
-    });
+		path.on('mouseout', function() {                              // NEW
+			tooltip.style('display', 'none');                           // NEW
+		}); 
 
-// add the text
-arcs.append("svg:text").attr("transform", function(d){
-			d.innerRadius = 100;
-			d.outerRadius = r;
-    return "translate(" + arc.centroid(d) + ")";}).attr("text-anchor", "middle").text( function(d, i) {
-    return data[i].label;}
-		);
+		/* OPTIONAL 
+    path.on('mousemove', function(d) {                            // NEW
+      tooltip.style('top', (d3.event.pageY + 10) + 'px')          // NEW
+        .style('left', (d3.event.pageX + 10) + 'px');             // NEW
+    });                                                           // NEW
+		 */
+
+		var legend = svg.selectAll('.chart_legend')
+		.data(color.domain())
+		.enter()
+		.append('g')
+		.attr('class', 'chart_legend')
+		.attr('transform', function(d, i) {
+			var height = legendRectSize + legendSpacing;
+			var offset =  height * color.domain().length / 2;
+			var horz = -2 * legendRectSize;
+			var vert = i * height - offset;
+			return 'translate(' + horz + ',' + vert + ')';
+		});
+
+		legend.append('rect')
+		.attr('width', legendRectSize)
+		.attr('height', legendRectSize)
+		.style('fill', color)
+		.style('stroke', color)
+		.on('click', function(device) {
+			var rect = d3.select(this);
+			var enabled = true;
+			var totalEnabled = d3.sum(dataset.map(function(d) {
+				return (d.enabled) ? 1 : 0;
+			}));
+
+			if (rect.attr('class') === 'disabled') {
+				rect.attr('class', '');
+			} else {
+				if (totalEnabled < 2) return;
+				rect.attr('class', 'disabled');
+				enabled = false;
+			}
+
+			pie.value(function(d) {
+				if (d.device === device) d.enabled = enabled;
+				return (d.enabled) ? d.count : 0;
+			});
+
+			path = path.data(pie(dataset));
+
+			path.transition()
+			.duration(750)
+			.attrTween('d', function(d) {
+				var interpolate = d3.interpolate(this._current, d);
+				this._current = interpolate(0);
+				return function(t) {
+					return arc(interpolate(t));
+				};
+			});
+		});
+
+		legend.append('text')
+		.attr('x', legendRectSize + legendSpacing)
+		.attr('y', legendRectSize - legendSpacing)
+		.text(function(d) { return d; });
+
+
+	}); 
+
+})(window.d3);
