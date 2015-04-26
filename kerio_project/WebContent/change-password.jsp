@@ -8,7 +8,7 @@
 
 <link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
 
-<title>Edit query | ClientStatistics - Kerio Connect</title>
+<title>Change password | ClientStatistics - Kerio Connect</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="css/dashboard.css" rel="stylesheet" type="text/css">
@@ -53,27 +53,17 @@
 		<div class="row">			
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-				<h1 class="page-header">Edit query</h1>
-				<form action="edit-query" method="post" >
-						<label>Name:</label>  (required)
-						<input type="text" name="name" class="form-control" value="${gueryToEdit.name}" required> 
-						
-						<label>Description:</label>  (required)
-						<input type="text" name="info" class="form-control" value="${gueryToEdit.info}" required>
+				<h1 class="page-header">Change Password</h1>
+				<form action="change-password" method="post" >
+						<label>New password:</label>  (required)
+						<input type="text" name="password" class="form-control" required> 						
 						 
-						<label>Query:</label>  (required)
-						<input type="text" name="statement" class="form-control" value="${gueryToEdit.statement}" required> 					
+						<label>Info about password:</label>  (required)
+						<input type="text" name="passwordInfo" class="form-control" value="${passwordInfo}" required>			
 
-						<input type="hidden" name="id" value="${gueryToEdit.id}" />
 		
-						<input type="submit" value="edit query" class="btn">
-				</form>		
-				<br><br><br><br>
-				<form action="delete-query" method="post" >		
-						<input type="hidden" name="id" value="${gueryToEdit.id}" />
-		
-						<input type="submit" value="delete this query" class="btn btn-danger">
-				</form>			
+						<input type="submit" value="change password" class="btn">
+				</form>					
 			</div>
 		</div>
 	</div>

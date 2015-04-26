@@ -81,7 +81,7 @@ public class QueryManagement {
 	}
 	
 	/**
-	 * delete querz identified by ID
+	 * delete query identified by ID
 	 * @param id
 	 */
 	public void deleteQuery(int id) {		
