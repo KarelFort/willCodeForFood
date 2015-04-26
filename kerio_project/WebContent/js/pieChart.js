@@ -68,15 +68,15 @@
 			tooltip.style('display', 'block');
 		});
 
-		path.on('mouseout', function() {                              // NEW
-			tooltip.style('display', 'none');                           // NEW
+		path.on('mouseout', function() {                           
+			tooltip.style('display', 'none');                       
 		}); 
 
 		/* OPTIONAL 
-    path.on('mousemove', function(d) {                            // NEW
-      tooltip.style('top', (d3.event.pageY + 10) + 'px')          // NEW
-        .style('left', (d3.event.pageX + 10) + 'px');             // NEW
-    });                                                           // NEW
+    path.on('mousemove', function(d) {                          
+      tooltip.style('top', (d3.event.pageY + 10) + 'px')          
+        .style('left', (d3.event.pageX + 10) + 'px');            
+    });                                                         
 		 */
 
 		var legend = svg.selectAll('.chart_legend')

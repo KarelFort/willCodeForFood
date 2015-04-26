@@ -37,6 +37,9 @@
 	src="js/lib/d3.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>   
+
 </head>
 
 <body>
@@ -66,26 +69,24 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="#">Mobile devices<span
-							class="sr-only">(current)</span></a></li>
-					<li><a href="#">SQL dotay 2</a></li>
-					<li><a href="#">SQL dotaz 3</a></li>
-					<li><a href="#">SQL dotaz 4</a></li>
-					<li><a href="#">SQL dotaz 5</a></li>
-					<li><a href="#">SQL dotaz 6</a></li>
-					<li><a href="#">SQL dotaz 7</a></li>
-					<li><a href="#">SQL dotaz 8</a></li>
-					<li><a href="#">SQL dotaz 9</a></li>
-					<li><a href="#">SQL dotaz 10</a></li>
-					<li><a href="#">SQL dotaz 11</a></li>
-					<li><a href="#">...</a></li>
+					<c:choose>
+						<c:when test="${fn:length(allQueries) == 0}">
+							<p class="alert-warning">Nenalezeny žádné dotazy.</p>
+						</c:when>
+
+						<c:otherwise>
+							<c:forEach items="${requestScope.allQueries}" var="query">
+								<li><a href="edit-query?id=${query.id}">${query.name}</a></li>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>			
 				</ul>
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<div id="div-header">
-			<p>Last updated 12. 4. 2015 v 16:55</p>
+			<p>Last updated 12. 4. 2015 in 16:55</p>
 
 			<h1 class="page-header" id="query-name"></h1>
 		</div>
@@ -114,7 +115,7 @@
 				<div class="input-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
 					<input type="text" class="form-control" id="datepicker-from"
 						style="cursor: pointer; background-color: white"
-						placeholder="mm/dd/yyyy" readonly="readonly"> <span
+						placeholder="yyyy-mm-dd" readonly="readonly"> <span
 						class="input-group-btn">
 						<button class="btn btn-default" type="button" disabled>
 							<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
@@ -127,7 +128,7 @@
 				<div class="input-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
 					<input type="text" class="form-control" id="datepicker-to"
 						style="cursor: pointer; background-color: white"
-						placeholder="mm/dd/yyyy" readonly="readonly"> <span
+						placeholder="yyyy-mm-dd" readonly="readonly"> <span
 						class="input-group-btn">
 						<button class="btn btn-default" type="button" disabled>
 							<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
