@@ -79,7 +79,8 @@ public class Json extends HttpServlet {
 		}
 		
 		jObj = dm.dataService(id, date1, date2);
-		response.getWriter().print(jObj);
+		response.setContentType("application/json");
+		response.getWriter().write(jObj.toString());
 
 	}
 
