@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kerio.client.statistic.model.QueryManagement;
+import kerio.model.QueryManagement;
 
 
 
@@ -45,7 +45,13 @@ public class AddQuery extends HttpServlet {
 		String name = (String) request.getParameter("name");
 		String info = (String) request.getParameter("info");
 		
-		QueryManagement queries = new QueryManagement();
+		QueryManagement queries = null;
+		try {
+			queries = new QueryManagement(getServletContext());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		queries.addQuery(statement, name, info);
 			
 		request.getSession().setAttribute("message", "Query added succesfully");

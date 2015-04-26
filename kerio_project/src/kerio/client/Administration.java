@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kerio.client.statistic.model.QueryManagement;
 import kerio.data.Query;
+import kerio.model.QueryManagement;
 
 /**
  * Servlet implementation class Administrace
@@ -31,7 +31,13 @@ public class Administration extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		QueryManagement queries = new QueryManagement();
+		QueryManagement queries = null;
+		try {
+			queries = new QueryManagement(getServletContext());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		List<Query> allQueries = queries.getAllQueries();
 		
 		request.setAttribute("allQueries", allQueries);

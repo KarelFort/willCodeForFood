@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kerio.client.statistic.model.QueryManagement;
+import kerio.model.QueryManagement;
 
 /**
  * Servlet implementation class DeleteQuery
@@ -37,7 +37,13 @@ public class DeleteQuery extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		int id = Integer.parseInt(request.getParameter("id"));
 			
-		QueryManagement queries = new QueryManagement();
+		QueryManagement queries = null;
+		try {
+			queries = new QueryManagement(getServletContext());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		queries.deleteQuery(id);
 			
 		request.getSession().setAttribute("message", "Query deleted succesfully");

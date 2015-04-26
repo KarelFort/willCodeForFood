@@ -1,11 +1,6 @@
 package kerio.client;
 
 import java.io.IOException;
-
-
-
-
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kerio.client.statistic.model.AdminManagement;
+import kerio.model.AdminManagement;
 
 /**
  * Servlet implementation class ChangePassword
@@ -33,7 +28,13 @@ public class ChangePassword extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		AdminManagement admins = new AdminManagement();
+		AdminManagement admins = null;
+		try {
+			admins = new AdminManagement(getServletContext());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String passwordInfo = admins.getPasswordInfo();
 		
 		request.setAttribute("passwordInfo", passwordInfo);
@@ -48,7 +49,13 @@ public class ChangePassword extends HttpServlet {
 		String password = (String) request.getParameter("password");
 		String passwordInfo = (String) request.getParameter("passwordInfo");
 		
-		AdminManagement admins = new AdminManagement();
+		AdminManagement admins = null;
+		try {
+			admins = new AdminManagement(getServletContext());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		admins.changePassword(password, passwordInfo);
 			
 		request.getSession().setAttribute("message", "Password changed succesfully");

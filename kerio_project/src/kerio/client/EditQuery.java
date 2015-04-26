@@ -3,14 +3,14 @@ package kerio.client;
 import java.io.IOException;
 
 import kerio.data.Query;
+import kerio.model.QueryManagement;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import kerio.client.statistic.model.QueryManagement;
 
 /**
  * Servlet implementation class EditQuery
@@ -32,7 +32,13 @@ public class EditQuery extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		QueryManagement queries = new QueryManagement();
+		QueryManagement queries = null;
+		try {
+			queries = new QueryManagement(getServletContext());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Query gueryToEdit = queries.getQuery(id);
 		
 		request.setAttribute("gueryToEdit", gueryToEdit);
@@ -50,7 +56,13 @@ public class EditQuery extends HttpServlet {
 		String name = (String) request.getParameter("name");
 		String info = (String) request.getParameter("info");
 			
-		QueryManagement queries = new QueryManagement();
+		QueryManagement queries = null;
+		try {
+			queries = new QueryManagement(getServletContext());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		queries.updateQuery(id, statement, name, info);
 			
 		request.getSession().setAttribute("message", "Query edited succesfully");
