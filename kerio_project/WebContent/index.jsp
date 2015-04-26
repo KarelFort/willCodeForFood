@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="shortcut icon" href="img/favicon.ico"
+	type="image/vnd.microsoft.icon" />
 
 <title>ClientStatistics - Kerio Connect</title>
 
@@ -38,7 +39,7 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>   
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 </head>
 
@@ -46,9 +47,8 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="index"> <img
-					src="img/logo_v2.png" alt="ClientStatistics Home" width="273"
-					height="34" border="0" /></a>
+				<a class="navbar-brand" href="index"> <img src="img/logo_v2.png"
+					alt="ClientStatistics Home" width="273" height="34" border="0" /></a>
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 					aria-controls="navbar">
@@ -76,12 +76,13 @@
 
 						<c:otherwise>
 							<c:forEach items="${requestScope.allQueries}" var="query">
-								<li><a href="edit-query?id=${query.id}">${query.name}</a></li>
+								<li><a href="query-datepicker?id=${query.id}">${query.name}</a></li>
 							</c:forEach>
 						</c:otherwise>
-					</c:choose>			
+					</c:choose>
 				</ul>
 			</div>
+			
 		</div>
 	</div>
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -170,8 +171,8 @@
 	</div>
 	<script type="text/javascript" language="javascript"
 		src="js/queryHeader.js"></script>
-	<script type="text/javascript" language="javascript"
-		src="js/datepicker.js"></script>
+<!-- 	<script type="text/javascript" language="javascript" -->
+<!-- 		src="js/datepicker.js"></script> -->
 	<script type="text/javascript" language="javascript"
 		src="js/dataTable.js"></script>
 	<script type="text/javascript" language="javascript"

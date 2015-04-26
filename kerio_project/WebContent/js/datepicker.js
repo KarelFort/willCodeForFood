@@ -3,6 +3,7 @@ $(document).ready(function() {
 
 		var dateFrom;
 		var dateTo;
+		var id = 1;
 
 		//send req: id and date range and display it correctly 
 
@@ -29,6 +30,7 @@ $(document).ready(function() {
 	});
 
 	$("#btn-execute").click(function() {
+		var id = 1;
 
 		dateFrom = $("#datepicker-from").val();
 		dateTo = $("#datepicker-to").val();
@@ -42,18 +44,19 @@ $(document).ready(function() {
 			alert("Enter the correct date range");
 			return;
 		}
-		
+
 		//send req with dates
 		$.ajax
 		({
 			type: "POST",
 			//the url where you want to sent the dates to
-			url: 'index',
+			url: 'json',
 			dataType: 'json',
 			async: false,
-			data: JSON.stringify({ "dateFrom": dateFrom, "dateTo" : dateTo }),
+			data: JSON.stringify({ "id": id, "date1": dateFrom, "date2" : dateTo }),
 			success: function () {
 				alert("Request sent!"); 
+				
 			},
 			failure: function(errMsg) {
 				alert(errMsg);
