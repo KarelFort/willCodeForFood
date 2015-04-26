@@ -1,42 +1,28 @@
-package kerio.client.statistic.model;
+package kerio.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 import kerio.data.Query;
 
-public class QueryManagement {
+public class QueryManagement extends DbConnection{
 
-	// set connection details
-	private String dbURL = "jdbc:mysql://localhost:3306/client_statistics";
-	private String login = "root";
-	private String password = "";
-	private Statement stmnt;
-	private String tableCols = "statement, name, info";
-	private String dbName = "client_statistics.client_sql_statements";	
-
-	public QueryManagement(){
-		init();
+	private static Statement stmnt;
+	private static final String tableCols = "statement, name, info";
+	private static final String tableName = "client_sql_statements";
+	
+	public QueryManagement(ServletContext servletContext) throws ClassNotFoundException {
+		super(servletContext);
+		stmnt = super.getStmnt();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void init() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			
-			Connection newConnection = DriverManager.getConnection(dbURL,
-					login, password);
-			stmnt = newConnection.createStatement();
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-	}
 /**
  * Insert new query to database
  * @param statement
@@ -44,7 +30,7 @@ public class QueryManagement {
  * @param info
  */
 	public void addQuery(String statement, String name, String info) {
-		String addStatement = "INSERT INTO " + dbName + " (" + tableCols
+		String addStatement = "INSERT INTO " + tableName + " (" + tableCols
 				+ ") VALUES ( '" + statement + "', '" + name + "', '" + info
 				+ "')";		
 		try {
@@ -62,9 +48,10 @@ public class QueryManagement {
 	public Query getQuery(int id) {
 		Query query = new Query();
 		
-		String getStatement = "SELECT * FROM " + dbName
+		String getStatement = "SELECT * FROM " + tableName
 				+ " WHERE ID=" + id;
 		ResultSet result;
+		if(stmnt != null){
 		try {
 			result = stmnt.executeQuery(getStatement);
 			result.next();
@@ -77,6 +64,7 @@ public class QueryManagement {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		}
 		return query;
 	}
 	
@@ -85,7 +73,7 @@ public class QueryManagement {
 	 * @param id
 	 */
 	public void deleteQuery(int id) {		
-		String deleteStatement = "DELETE FROM " + dbName + " WHERE ID=" + id;
+		String deleteStatement = "DELETE FROM " + tableName + " WHERE ID=" + id;
 		
 		try {
 			stmnt.executeUpdate(deleteStatement);					
@@ -101,7 +89,7 @@ public class QueryManagement {
 	public List<Query> getAllQueries() {
 		List<Query> allQueries = new ArrayList<Query>();
 		
-		String getStatement = "SELECT * FROM " + dbName;
+		String getStatement = "SELECT * FROM " + tableName;
 		ResultSet result;		
 		try {
 			result = stmnt.executeQuery(getStatement);
@@ -131,7 +119,7 @@ public class QueryManagement {
 	public void updateQuery(int id, String statement, String name,
 			String info) {
 
-		String updateStatement = "UPDATE " + dbName + " set STATEMENT = '"
+		String updateStatement = "UPDATE " + tableName + " set STATEMENT = '"
 				+ statement + "', NAME = '" + name + "', INFO = '" + info
 				+ "' WHERE id= " + id;
 		try {
