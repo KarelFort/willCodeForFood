@@ -3,9 +3,7 @@ package kerio.client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,10 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
 
 import kerio.model.DataManagement;
-import kerio.model.QueryManagement;
+
 
 /**
  * Servlet implementation class json
