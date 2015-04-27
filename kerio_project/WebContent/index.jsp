@@ -108,47 +108,6 @@
 
 		<br>
 
-		<div id="div-datepicker">
-
-			<h4>Date range</h4>
-
-			<div style="padding: 0px">
-				<div class="input-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<input type="text" class="form-control" id="datepicker-from"
-						style="cursor: pointer; background-color: white"
-						placeholder="yyyy-mm-dd" readonly="readonly"> <span
-						class="input-group-btn">
-						<button class="btn btn-default" type="button" disabled>
-							<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-						</button>
-					</span>
-				</div>
-				<!-- /input-group -->
-
-				<br>
-				<div class="input-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<input type="text" class="form-control" id="datepicker-to"
-						style="cursor: pointer; background-color: white"
-						placeholder="yyyy-mm-dd" readonly="readonly"> <span
-						class="input-group-btn">
-						<button class="btn btn-default" type="button" disabled>
-							<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-						</button>
-					</span>
-				</div>
-				<!-- /input-group -->
-
-			</div>
-			<!-- /.col-lg-6 -->
-			<br>
-			<div>
-				<button type="button" class="btn btn-primary" id="btn-execute">Execute
-					query</button>
-			</div>
-		</div>
-
-		<br>
-
 		<div id="div-table">
 			<h4>Table</h4>
 			<table id="table" class="table table-striped table-bordered"

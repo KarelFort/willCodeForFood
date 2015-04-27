@@ -68,7 +68,7 @@
 				<h1 class="page-header">Set date range</h1>
 
 				<div id="div-datepicker">
-
+					<input type="hidden" name="id" id="datepicker-query-id" value="${queryDatepicker.id}" />
 
 					<div style="padding: 0px">
 						<div class="input-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
