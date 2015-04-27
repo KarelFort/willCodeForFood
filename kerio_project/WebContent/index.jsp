@@ -82,43 +82,26 @@
 					</c:choose>
 				</ul>
 			</div>
-			
+
 		</div>
 	</div>
+	
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
 		<div id="div-header">
-			<p>Last updated 2015-04-12 in 16:55</p>
 
-
-
-			<h1 class="page-header" id="query-name"></h1>
+			<h1 class="page-header" id="query-name">Welcome</h1>
 		</div>
-		<div id="div-description" class="collapse in">
-			<ul class="nav nav-tabs" id="ic_tabs">
-				<li class="active"><a href="#tab1" data-toggle="tab">Description</a></li>
-				<li><a href="#tab2" data-toggle="tab">SQL</a></li>
-			</ul>
-			<div id="ic_tabsContent" class="tab-content">
-				<div class="tab-pane fade in active" id="tab1">
-					<h5 id="description"></h5>
-				</div>
-				<div class="tab-pane fade" id="tab2">
-					<h5 id="query"></h5>
-				</div>
-			</div>
-		</div>
-
 		
+		<p>Welcome to ClientStatistics application, analytical and reporting tool for KerioConnect product. </p>
+		<p>Select query from the side menu for displying query. Click on Admin button for creating, editing and deleting queries.</p>
 		
+		<br>
 		
+		<p>Database updated 2015-04-12 in 16:55</p>
 	</div>
-	<script type="text/javascript" language="javascript"
-		src="js/queryHeader.js"></script>
-<!-- 	<script type="text/javascript" language="javascript" -->
-<!-- 		src="js/datepicker.js"></script> -->
-	<script type="text/javascript" language="javascript"
-		src="js/dataTable.js"></script>
-	<script type="text/javascript" language="javascript"
-		src="js/pieChart.js"></script>
+
+	<!-- 	<script type="text/javascript" language="javascript" -->
+	<!-- 		src="js/pieChart.js"></script> -->
 </body>
 </html>

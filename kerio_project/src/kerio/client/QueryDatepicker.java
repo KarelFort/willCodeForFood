@@ -3,6 +3,7 @@ package kerio.client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import kerio.data.Query;
 import kerio.model.DataManagement;
@@ -41,6 +42,7 @@ public class QueryDatepicker extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		int id = Integer.parseInt(request.getParameter("id"));
 		System.out.println("Query id = "+ id);
 
@@ -51,6 +53,11 @@ public class QueryDatepicker extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		List<Query> allQueries = queries.getAllQueries();
+		
+		request.setAttribute("allQueries", allQueries);
+		
 		Query queryDatepicker = queries.getQuery(id);
 
 		request.setAttribute("queryDatepicker", queryDatepicker);

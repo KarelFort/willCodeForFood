@@ -35,6 +35,9 @@
 	src="js/lib/d3.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 </head>
 
 <body>
@@ -59,15 +62,57 @@
 			</div>
 		</div>
 	</nav>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+					<c:choose>
+						<c:when test="${fn:length(allQueries) == 0}">
+							<p class="alert-warning">Nenalezeny žádné dotazy.</p>
+						</c:when>
+
+						<c:otherwise>
+							<c:forEach items="${requestScope.allQueries}" var="query">
+								<li><a href="query-datepicker?id=${query.id}">${query.name}</a></li>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
+
+		</div>
+	</div>
 
 
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-				<h1 class="page-header">Set date range</h1>
+				<div id="div-header">
 
-				<div id="div-datepicker">
+
+					<h1 class="page-header" id="query-name"></h1>
+				</div>
+
+				<div id="div-description" class="collapse in">
+					<ul class="nav nav-tabs" id="ic_tabs">
+						<li class="active"><a href="#tab1" data-toggle="tab">Description</a></li>
+						<li><a href="#tab2" data-toggle="tab">SQL</a></li>
+					</ul>
+					<div id="ic_tabsContent" class="tab-content">
+						<div class="tab-pane fade in active" id="tab1">
+							<h5 id="description"></h5>
+						</div>
+						<div class="tab-pane fade" id="tab2">
+							<h5 id="query"></h5>
+						</div>
+					</div>
+				</div>
+
+				<br>
+				<br>
+				<div id="div-datepicker"> Set date range
 					<input type="hidden" name="id" id="datepicker-query-id"
 						value="${queryDatepicker.id}" />
 
@@ -104,26 +149,27 @@
 						<button type="button" class="btn btn-primary" id="btn-execute">Execute
 							query</button>
 					</div>
+					<br>
 				</div>
 
 				<br>
+
 				<div id="datepicker-alert"></div>
 
 				<div id="div-table">
-<!-- 					<h4>Table</h4> -->
+					<!-- 					<h4>Table</h4> -->
 					<table id="table" class="table table-striped table-bordered"
 						cellspacing="0" width="100%">
 
 						<thead>
 							<tr id="table-header">
-								
 							</tr>
 						</thead>
 					</table>
 				</div>
 
 				<div id="div-chart">
-<!-- 					<h4>Chart</h4> -->
+					<!-- 					<h4>Chart</h4> -->
 					<div id="chart"></div>
 				</div>
 			</div>
@@ -131,6 +177,12 @@
 	</div>
 	<script type="text/javascript" language="javascript"
 		src="js/datepicker.js"></script>
+	<script type="text/javascript" language="javascript"
+		src="js/queryHeader.js"></script>
+<!-- 	<script type="text/javascript" language="javascript" -->
+<!-- 		src="js/dataTable.js"></script> -->
+	<script type="text/javascript" language="javascript"
+		src="js/pieChart.js"></script>
 
 </body>
 </html>
