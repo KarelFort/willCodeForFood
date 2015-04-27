@@ -28,6 +28,7 @@ import kerio.model.DataManagement;
 
 /**
  * Servlet implementation class json
+ * Testing JSON format only! 
  */
 @WebServlet("/json")
 public class Json extends HttpServlet {
