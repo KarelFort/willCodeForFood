@@ -44,6 +44,7 @@ public class DataManagement extends DbConnection{
 		JSONObject resultJson = null;
 		try {
 			resultJson = resultToJson(result);
+			System.out.println(resultJson);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

@@ -11,32 +11,7 @@ $(document).ready(function() {
 		$('#description').html("Choose type, percentage and count of mobile devices");
 
 
-		$.ajax
-		({
-			type: "GET",
-			//the url where you want to sent the dates to
-			url: 'application/json',
-			dataType: 'json',
-			success: function(data) {
-				iterateJson(data);
-			},
-			failure: function(errMsg) {
-				alert(errMsg);
-			}
-		});
-		
-		function iterateJson(data)
-		{
 
-			$.each(data, function() {
-				alert(data);
-//				$.each(this, function(k, v) {
-//					var capacity=v["_capacity"];
-//
-//				});
-			});
-
-		}
 
 	});
 

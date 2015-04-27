@@ -14,6 +14,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+
+
+
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
 import kerio.model.DataManagement;
 
 
@@ -38,6 +47,39 @@ public class Json extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+//		BufferedReader br = new BufferedReader(new InputStreamReader(
+//				request.getInputStream()));
+//		String jsonString = "";
+//		if (br != null) {
+//			jsonString = br.readLine();
+//		}
+//		String jsonString = "{\"id\": 9, \"date1\":\"2015-03-01\", \"date2\":\"2015-03-30\"}";
+//		int id = -1;
+//		String date1 = null;
+//		String date2 = null;
+//		try {
+//			JSONObject jObjRecieved = new JSONObject(jsonString);
+//			id = jObjRecieved.getInt("id");
+//			date1 = jObjRecieved.getString("date1");
+//			date2 = jObjRecieved.getString("date2");
+//
+//		} catch (JSONException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//
+//		JSONObject jObj = new JSONObject();
+//		DataManagement dm = null;
+//		try {
+//			dm = new DataManagement(getServletContext());
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		jObj = dm.dataService(id, date1, date2);
+//		response.setContentType("application/json");
+//		response.getWriter().write(jObj.toString());
 
 	}
 
@@ -81,6 +123,11 @@ public class Json extends HttpServlet {
 		jObj = dm.dataService(id, date1, date2);
 		response.setContentType("application/json");
 		response.getWriter().write(jObj.toString());
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		JsonParser jp = new JsonParser();
+		JsonElement je = jp.parse(jObj.toString());
+		String prettyJsonString = gson.toJson(je);
+		System.out.println("pretty "+prettyJsonString);
 
 	}
 

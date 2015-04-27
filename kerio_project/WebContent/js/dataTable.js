@@ -3,19 +3,19 @@ $(document).ready(function() {
 	$.ajax({ 
 		type: 'GET', 
 		url: 'data/result.json', 
-		data: { get_param: 'value' }, 
+//		data: { get_param: 'value' }, 
 		dataType: 'json',
 		success: function (data) { 
 			console.log(data);
 
 			$('#table').dataTable( {
 				"processing": true,
-				"serverSide": false,
+//				"serverSide": false,
 				"ajax": "data/result.json",
 				"columns": [
-				            { "data": "device" },
-				            { "data": "percentage" },
-				            { "data": "count" }
+				            { "data": "Version" },
+				            { "data": "Client" },
+				            { "data": "Count" }
 				            ],
 				            aoColumnDefs: [
 				                           {

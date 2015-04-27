@@ -87,7 +87,9 @@
 	</div>
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<div id="div-header">
-			<p>Last updated 12. 4. 2015 in 16:55</p>
+			<p>Last updated 2015-04-12 in 16:55</p>
+
+
 
 			<h1 class="page-header" id="query-name"></h1>
 		</div>
@@ -106,27 +108,9 @@
 			</div>
 		</div>
 
-		<br>
-
-		<div id="div-table">
-			<h4>Table</h4>
-			<table id="table" class="table table-striped table-bordered"
-				cellspacing="0" width="100%">
-
-				<thead>
-					<tr>
-						<th>Device</th>
-						<th>Percentage</th>
-						<th>Count</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
-		<br>
-		<div id="div-chart">
-			<h4>Chart</h4>
-			<div id="chart"></div>
-		</div>
+		
+		
+		
 	</div>
 	<script type="text/javascript" language="javascript"
 		src="js/queryHeader.js"></script>

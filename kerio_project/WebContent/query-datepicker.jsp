@@ -9,7 +9,7 @@
 <link rel="shortcut icon" href="img/favicon.ico"
 	type="image/vnd.microsoft.icon" />
 
-<title>Edit query | ClientStatistics - Kerio Connect</title>
+<title>Query Datepicker | ClientStatistics - Kerio Connect</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="css/dashboard.css" rel="stylesheet" type="text/css">
@@ -68,7 +68,8 @@
 				<h1 class="page-header">Set date range</h1>
 
 				<div id="div-datepicker">
-					<input type="hidden" name="id" id="datepicker-query-id" value="${queryDatepicker.id}" />
+					<input type="hidden" name="id" id="datepicker-query-id"
+						value="${queryDatepicker.id}" />
 
 					<div style="padding: 0px">
 						<div class="input-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -105,12 +106,29 @@
 					</div>
 				</div>
 
+				<br>
+				<div id="datepicker-alert"></div>
+
+				<div id="div-table">
+<!-- 					<h4>Table</h4> -->
+					<table id="table" class="table table-striped table-bordered"
+						cellspacing="0" width="100%">
+
+						<thead>
+							<tr id="table-header">
+								
+							</tr>
+						</thead>
+					</table>
+				</div>
+
+				<div id="div-chart">
+<!-- 					<h4>Chart</h4> -->
+					<div id="chart"></div>
+				</div>
 			</div>
 		</div>
 	</div>
-
-
-
 	<script type="text/javascript" language="javascript"
 		src="js/datepicker.js"></script>
 
