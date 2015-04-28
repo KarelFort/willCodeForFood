@@ -12,3 +12,4 @@
     Data Import/export -> Import from self-contained file - choose path to *.sql, create new schema -> Start import 
     
     hh
+    kk
