@@ -11,4 +11,4 @@
 4. Import sql dump file to MySQL: 
     Data Import/export -> Import from self-contained file - choose path to *.sql, create new schema -> Start import 
     
-    
+
