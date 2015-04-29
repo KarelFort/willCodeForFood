@@ -89,7 +89,7 @@ public class QueryManagement extends DbConnection{
 	public List<Query> getAllQueries() {
 		List<Query> allQueries = new ArrayList<Query>();
 		
-		String getStatement = "SELECT * FROM " + tableName;
+		String getStatement = "SELECT * FROM " + tableName + " ORDER BY name ASC";
 		ResultSet result;		
 		try {
 			result = stmnt.executeQuery(getStatement);

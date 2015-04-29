@@ -1,5 +1,6 @@
 package kerio.model;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
@@ -18,7 +19,6 @@ public class AdminManagement extends DbConnection {
 		stmnt = super.getStmnt();
 		// TODO Auto-generated constructor stub
 	}
-
 
 	/**
 	 * returns info about password from DB
@@ -39,52 +39,72 @@ public class AdminManagement extends DbConnection {
 		}
 		return passwordInfo;
 	}
+	
+	/**
+	 * checks, if the password for signin is correct
+	 * @return boolean 
+	 */
+	public boolean passwordIsCorrect(String password) {		
+		String passwordFromDB = null;
+		String getStatement = "SELECT value FROM client_statistics.settings WHERE name = 'password'";
+		ResultSet result;
+		try {
+			result = stmnt.executeQuery(getStatement);
+			result.next();
+			passwordFromDB = result.getString("value");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		String hashedPassword = doHash(password);
+		if (hashedPassword.equals(passwordFromDB)){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
 
 	/**
 	 * updates password (hashed) and info about password in the database
 	 * 
 	 * @param newPass
 	 * @param newInfo
+	 * @throws SQLException
 	 */
-	public void changePassword(String newPass, String newInfo) {
-		String hashedPass = this.doMD5(newPass); // hashing the password to MD5
+	public void changePassword(String newPass, String newInfo)
+			throws SQLException {
+		String hashedPass = this.doHash(newPass); // hashing the password to MD5
 
 		String updateStatement = "UPDATE client_statistics.settings SET value = '"
-				+ hashedPass + "' WHERE name = 'password';";
+				+ hashedPass.toString() + "' WHERE name = 'password';";
 		String updateStatement1 = "UPDATE client_statistics.settings SET value = '"
 				+ newInfo + "' WHERE name = 'passwordInfo';";
-		try {
-			stmnt.executeUpdate(updateStatement);
-			stmnt.executeUpdate(updateStatement1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+
+		stmnt.executeUpdate(updateStatement);
+		stmnt.executeUpdate(updateStatement1);
 	}
 
 	/**
-	 * hashes input to MD5 string
+	 * converts new password into SHA256 hash
 	 * 
-	 * @param input
-	 * @return input in MD5
+	 * @param newPass
+	 * @return
 	 */
-	public String doMD5(String input) {
-		MessageDigest md = null;
+	public String doHash(String newPass) {
 		try {
-			md = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException e1) {
-			e1.printStackTrace();
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] arrayBytes = digest.digest((newPass).getBytes("UTF-8"));
+			StringBuffer stringBuffer = new StringBuffer();
+			for (int i = 0; i < arrayBytes.length; i++) {
+				stringBuffer.append(Integer.toString(
+						(arrayBytes[i] & 0xff) + 0x100, 16).substring(1));
+			}
+			return stringBuffer.toString();
+		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+			return null;
 		}
-		md.update(input.getBytes());
-
-		byte byteData[] = md.digest();
-
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < byteData.length; i++) {
-			sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16)
-					.substring(1));
-		}
-
-		return sb.toString();
 	}
+
+	
 
 }

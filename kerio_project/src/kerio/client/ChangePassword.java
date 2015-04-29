@@ -1,6 +1,8 @@
 package kerio.client;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,21 +49,33 @@ public class ChangePassword extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String password = (String) request.getParameter("password");
+		String passwordAgain = (String) request.getParameter("passwordAgain");
 		String passwordInfo = (String) request.getParameter("passwordInfo");
 		
-		AdminManagement admins = null;
-		try {
-			admins = new AdminManagement(getServletContext());
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (password.equals(passwordAgain)){
+			AdminManagement admins = null;
+			try {
+				admins = new AdminManagement(getServletContext());
+				admins.changePassword(password, passwordInfo);
+				
+				request.getSession().setAttribute("message", "Password changed successfully");
+				request.getSession().setAttribute("message_type", "success");
+			} catch (ClassNotFoundException | SQLException e) {			
+				e.printStackTrace();
+				request.getSession().setAttribute("message", "Something went wrong. Password not changed.");
+				request.getSession().setAttribute("message_type", "danger");
+			}
+						
+			response.sendRedirect("administration");
+		} else {
+			request.setAttribute("message", "Passwords are not the same.");
+			request.setAttribute("message_type", "danger");
+			request.setAttribute("passwordInfo", passwordInfo);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("change-password.jsp");
+			dispatcher.forward(request, response);
 		}
-		admins.changePassword(password, passwordInfo);
-			
-		request.getSession().setAttribute("message", "Password changed succesfully");
-		request.getSession().setAttribute("message_type", "success");	
 		
-		response.sendRedirect("administration");
+		
 	}
 
 }

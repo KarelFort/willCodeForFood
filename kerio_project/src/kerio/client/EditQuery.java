@@ -1,6 +1,7 @@
 package kerio.client;
 
 import java.io.IOException;
+import java.util.List;
 
 import kerio.data.Query;
 import kerio.model.QueryManagement;
@@ -30,6 +31,7 @@ public class EditQuery extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//get data for one query, which I want to edit
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		QueryManagement queries = null;
@@ -42,6 +44,18 @@ public class EditQuery extends HttpServlet {
 		Query gueryToEdit = queries.getQuery(id);
 		
 		request.setAttribute("gueryToEdit", gueryToEdit);
+		
+		
+		//get List of queries to show in left menu
+		try {
+			queries = new QueryManagement(getServletContext());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Query> allQueries = queries.getAllQueries();
+		
+		request.setAttribute("allQueries", allQueries);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("edit-query.jsp");
 		dispatcher.forward(request, response);

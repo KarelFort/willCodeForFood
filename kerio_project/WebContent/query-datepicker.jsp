@@ -34,64 +34,16 @@
 <script type="text/javascript" language="javascript"
 	src="js/lib/d3.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
 </head>
 
 <body>
-
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="index"> <img src="img/logo_v2.png"
-					alt="ClientStatistics Home" width="273" height="34" border="0" /></a>
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="administration">Admin</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<jsp:include page="components/header.jsp" />
 	
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					<c:choose>
-						<c:when test="${fn:length(allQueries) == 0}">
-							<p class="alert-warning">Nenalezeny žádné dotazy.</p>
-						</c:when>
-
-						<c:otherwise>
-							<c:forEach items="${requestScope.allQueries}" var="query">
-								<li><a href="query-datepicker?id=${query.id}">${query.name}</a></li>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</ul>
-			</div>
-
-		</div>
-	</div>
-
-
-	<div class="container-fluid">
-		<div class="row">
+		<div class="row">	
+			<jsp:include page="components/menu.jsp" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
 				<div id="div-header">
-
-
 					<h1 class="page-header" id="query-name"></h1>
 				</div>
 
