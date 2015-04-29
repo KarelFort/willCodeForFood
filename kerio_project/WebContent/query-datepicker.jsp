@@ -34,10 +34,6 @@
 <script type="text/javascript" language="javascript"
 	src="js/lib/d3.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
 </head>
 
 <body>
@@ -63,35 +59,12 @@
 		</div>
 	</nav>
 	
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					<c:choose>
-						<c:when test="${fn:length(allQueries) == 0}">
-							<p class="alert-warning">Nenalezeny žádné dotazy.</p>
-						</c:when>
-
-						<c:otherwise>
-							<c:forEach items="${requestScope.allQueries}" var="query">
-								<li><a href="query-datepicker?id=${query.id}">${query.name}</a></li>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</ul>
-			</div>
-
-		</div>
-	</div>
-
-
+	<jsp:include page="components/menu.jsp" />
+	
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
 				<div id="div-header">
-
-
 					<h1 class="page-header" id="query-name"></h1>
 				</div>
 
