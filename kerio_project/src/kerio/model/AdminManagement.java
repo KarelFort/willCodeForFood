@@ -39,6 +39,30 @@ public class AdminManagement extends DbConnection {
 		}
 		return passwordInfo;
 	}
+	
+	/**
+	 * checks, if the password for signin is correct
+	 * @return boolean 
+	 */
+	public boolean passwordIsCorrect(String password) {		
+		String passwordFromDB = null;
+		String getStatement = "SELECT value FROM client_statistics.settings WHERE name = 'password'";
+		ResultSet result;
+		try {
+			result = stmnt.executeQuery(getStatement);
+			result.next();
+			passwordFromDB = result.getString("value");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		String hashedPassword = doHash(password);
+		if (hashedPassword.equals(passwordFromDB)){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
 
 	/**
 	 * updates password (hashed) and info about password in the database
@@ -81,30 +105,6 @@ public class AdminManagement extends DbConnection {
 		}
 	}
 
-	/**
-	 * hashes input to MD5 string
-	 * 
-	 * @param input
-	 * @return input in MD5
-	 */
-	public String doMD5(String input) {
-		MessageDigest md = null;
-		try {
-			md = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException e1) {
-			e1.printStackTrace();
-		}
-		md.update(input.getBytes());
-
-		byte byteData[] = md.digest();
-
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < byteData.length; i++) {
-			sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16)
-					.substring(1));
-		}
-
-		return sb.toString();
-	}
+	
 
 }
