@@ -15,10 +15,13 @@
 
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="administration">Queries edit</a></li>
+				<li><a href="administration">Edit statistic</a></li>
+				<li><a href="add-query">Add statistic</a></li>
 				<li><a href="change-password">Change password</a></li>
 				<li><a href="logout">Logout</a></li>
+				<li><a href="administration"> Signed as Administrator</a></li>
 			</ul>
 		</div>
 	</div>
 </nav>
+

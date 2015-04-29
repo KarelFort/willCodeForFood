@@ -37,13 +37,8 @@
 				<!-- displaying message added in GeneralFilter-->
 				<p class="alert-${requestScope.message_type}">${requestScope.message}</p>
 
-				<h1 class="page-header">Queries edit</h1>
-				<p>Choose query on the left to editing.</p>
-				<br>
-				<h1 class="page-header">Add query</h1>
-				<a href="add-query">
-					<button type="button" class="btn btn-primary">Add query</button>
-				</a>
+				<h1 class="page-header">Edit statistic</h1>
+				<p>To edit concrete statistic, choose it from the left menu.</p>					
 			</div>
 		</div>
 	</div>

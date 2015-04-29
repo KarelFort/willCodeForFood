@@ -8,7 +8,7 @@
 
 <link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
 
-<title>Edit query | ClientStatistics - Kerio Connect</title>
+<title>Edit statistic | ClientStatistics - Kerio Connect</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="css/dashboard.css" rel="stylesheet" type="text/css">
@@ -31,7 +31,15 @@
 			<jsp:include page="components/menuAdmin.jsp" />
 					
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h1 class="page-header">Edit query</h1>
+				<br>
+				
+				<form action="delete-query" method="post" class="pull-right">		
+						<input type="hidden" name="id" value="${gueryToEdit.id}" />
+		
+						<input type="submit" value="delete" class="btn btn-danger">
+				</form>	
+				<h1 class="page-header">Edit statistic</h1>
+				
 				<form action="edit-query" method="post" >
 						<label>Name:</label>  (required)
 						<input type="text" name="name" class="form-control" value="${gueryToEdit.name}" required> 
@@ -40,18 +48,14 @@
 						<input type="text" name="info" class="form-control" value="${gueryToEdit.info}" required>
 						 
 						<label>Query:</label>  (required)
-						<input type="text" name="statement" class="form-control" value="${gueryToEdit.statement}" required> 					
+						
+						<textarea rows="4" cols="50" name="statement" class="form-control" value="${gueryToEdit.statement}" required>${gueryToEdit.statement}</textarea>					
 
 						<input type="hidden" name="id" value="${gueryToEdit.id}" />
-		
-						<input type="submit" value="edit query" class="btn">
-				</form>		
-				<br><br><br><br>
-				<form action="delete-query" method="post" >		
-						<input type="hidden" name="id" value="${gueryToEdit.id}" />
-		
-						<input type="submit" value="delete this query" class="btn btn-danger">
-				</form>			
+						<br>
+						<input type="submit" value="Save" class="btn btn-success pull-right">
+				</form>
+						
 			</div>
 		</div>
 	</div>
