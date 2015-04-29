@@ -1,5 +1,6 @@
 package kerio.model;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
@@ -18,7 +19,6 @@ public class AdminManagement extends DbConnection {
 		stmnt = super.getStmnt();
 		// TODO Auto-generated constructor stub
 	}
-
 
 	/**
 	 * returns info about password from DB
@@ -45,19 +45,39 @@ public class AdminManagement extends DbConnection {
 	 * 
 	 * @param newPass
 	 * @param newInfo
+	 * @throws SQLException
 	 */
-	public void changePassword(String newPass, String newInfo) {
-		String hashedPass = this.doMD5(newPass); // hashing the password to MD5
+	public void changePassword(String newPass, String newInfo)
+			throws SQLException {
+		String hashedPass = this.doHash(newPass); // hashing the password to MD5
 
 		String updateStatement = "UPDATE client_statistics.settings SET value = '"
-				+ hashedPass + "' WHERE name = 'password';";
+				+ hashedPass.toString() + "' WHERE name = 'password';";
 		String updateStatement1 = "UPDATE client_statistics.settings SET value = '"
 				+ newInfo + "' WHERE name = 'passwordInfo';";
+
+		stmnt.executeUpdate(updateStatement);
+		stmnt.executeUpdate(updateStatement1);
+	}
+
+	/**
+	 * converts new password into SHA256 hash
+	 * 
+	 * @param newPass
+	 * @return
+	 */
+	public String doHash(String newPass) {
 		try {
-			stmnt.executeUpdate(updateStatement);
-			stmnt.executeUpdate(updateStatement1);
-		} catch (SQLException e) {
-			e.printStackTrace();
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] arrayBytes = digest.digest((newPass).getBytes("UTF-8"));
+			StringBuffer stringBuffer = new StringBuffer();
+			for (int i = 0; i < arrayBytes.length; i++) {
+				stringBuffer.append(Integer.toString(
+						(arrayBytes[i] & 0xff) + 0x100, 16).substring(1));
+			}
+			return stringBuffer.toString();
+		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+			return null;
 		}
 	}
 

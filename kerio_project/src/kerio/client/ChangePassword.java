@@ -1,6 +1,8 @@
 package kerio.client;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,15 +54,16 @@ public class ChangePassword extends HttpServlet {
 		AdminManagement admins = null;
 		try {
 			admins = new AdminManagement(getServletContext());
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		admins.changePassword(password, passwordInfo);
+			admins.changePassword(password, passwordInfo);
 			
-		request.getSession().setAttribute("message", "Password changed succesfully");
-		request.getSession().setAttribute("message_type", "success");	
-		
+			request.getSession().setAttribute("message", "Password changed successfully");
+			request.getSession().setAttribute("message_type", "success");
+		} catch (ClassNotFoundException | SQLException e) {			
+			e.printStackTrace();
+			request.getSession().setAttribute("message", "Something went wrong. Password not changed.");
+			request.getSession().setAttribute("message_type", "danger");
+		}
+					
 		response.sendRedirect("administration");
 	}
 
