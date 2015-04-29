@@ -10,7 +10,7 @@
 
 			<c:otherwise>
 				<c:forEach items="${requestScope.allQueries}" var="query">
-					<li><a href="query-datepicker?id=${query.id}">${query.name}</a></li>
+					<li><a href="edit-query?id=${query.id}">${query.name}</a></li>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>

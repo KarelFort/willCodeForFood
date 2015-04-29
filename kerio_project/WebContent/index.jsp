@@ -41,43 +41,31 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="index"> <img src="img/logo_v2.png"
-					alt="ClientStatistics Home" width="273" height="34" border="0" /></a>
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="administration">Administration</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-	<jsp:include page="components/menu.jsp" />
+	<jsp:include page="components/header.jsp" />
 	
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		<div id="div-header">
-			<h1 class="page-header" id="query-name">Welcome</h1>
-		</div>
-		
-		<p>Welcome to ClientStatistics application, analytical and reporting tool for KerioConnect product. </p>
-		<p>Select query from the side menu for displying query. Click on Admin button for creating, editing and deleting queries.</p>
-		
-		<br>
-		
-		<p>Database updated 2015-04-12 in 16:55</p>
-	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<jsp:include page="components/menu.jsp" />
 
-	<!-- 	<script type="text/javascript" language="javascript" -->
-	<!-- 		src="js/pieChart.js"></script> -->
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div id="div-header">
+					<h1 class="page-header" id="query-name">Welcome</h1>
+				</div>
+
+				<p>Welcome to ClientStatistics application, analytical and
+					reporting tool for KerioConnect product.</p>
+				<p>Select query from the side menu for displying query. Click on
+					Admin button for creating, editing and deleting queries.</p>
+
+				<br>
+
+				<p>Database updated 2015-04-12 in 16:55</p>
+			</div>
+
+			<!-- 	<script type="text/javascript" language="javascript" -->
+			<!-- 		src="js/pieChart.js"></script> -->
+
+		</div>
+	</div>
 </body>
 </html>
