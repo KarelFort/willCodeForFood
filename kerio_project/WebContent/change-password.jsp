@@ -29,17 +29,21 @@
 	<div class="container-fluid">
 		<div class="row">			
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-				<h1 class="page-header">Change Password</h1>
+				<!-- displaying message added in GeneralFilter-->
+				<p class="alert-${requestScope.message_type}">${requestScope.message}</p>
+				
+				<h1 class="page-header">Change password</h1>
 				<form action="change-password" method="post" >
 						<label>New password:</label>  (required)
-						<input type="text" name="password" class="form-control" required> 						
+						<input type="text" name="password" class="form-control" required>
+						
+						<label>Repeat password:</label>  (required)
+						<input type="text" name="passwordAgain" class="form-control" required> 	 						
 						 
 						<label>Info about password:</label>  (required)
-						<input type="text" name="passwordInfo" class="form-control" value="${passwordInfo}" required>			
-
-		
-						<input type="submit" value="change password" class="btn">
+						<input type="text" name="passwordInfo" class="form-control" value="${passwordInfo}" required>	
+						<br>
+						<input type="submit" value="Save" class="btn btn-success">
 				</form>					
 			</div>
 		</div>

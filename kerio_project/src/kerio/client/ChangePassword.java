@@ -49,22 +49,33 @@ public class ChangePassword extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String password = (String) request.getParameter("password");
+		String passwordAgain = (String) request.getParameter("passwordAgain");
 		String passwordInfo = (String) request.getParameter("passwordInfo");
 		
-		AdminManagement admins = null;
-		try {
-			admins = new AdminManagement(getServletContext());
-			admins.changePassword(password, passwordInfo);
-			
-			request.getSession().setAttribute("message", "Password changed successfully");
-			request.getSession().setAttribute("message_type", "success");
-		} catch (ClassNotFoundException | SQLException e) {			
-			e.printStackTrace();
-			request.getSession().setAttribute("message", "Something went wrong. Password not changed.");
-			request.getSession().setAttribute("message_type", "danger");
+		if (password.equals(passwordAgain)){
+			AdminManagement admins = null;
+			try {
+				admins = new AdminManagement(getServletContext());
+				admins.changePassword(password, passwordInfo);
+				
+				request.getSession().setAttribute("message", "Password changed successfully");
+				request.getSession().setAttribute("message_type", "success");
+			} catch (ClassNotFoundException | SQLException e) {			
+				e.printStackTrace();
+				request.getSession().setAttribute("message", "Something went wrong. Password not changed.");
+				request.getSession().setAttribute("message_type", "danger");
+			}
+						
+			response.sendRedirect("administration");
+		} else {
+			request.setAttribute("message", "Passwords are not the same.");
+			request.setAttribute("message_type", "danger");
+			request.setAttribute("passwordInfo", passwordInfo);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("change-password.jsp");
+			dispatcher.forward(request, response);
 		}
-					
-		response.sendRedirect("administration");
+		
+		
 	}
 
 }

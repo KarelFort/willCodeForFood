@@ -36,7 +36,7 @@
 				<form action="delete-query" method="post" class="pull-right">		
 						<input type="hidden" name="id" value="${gueryToEdit.id}" />
 		
-						<input type="submit" value="delete" class="btn btn-danger">
+						<input type="submit" value="Delete" class="btn btn-danger">
 				</form>	
 				<h1 class="page-header">Edit statistic</h1>
 				
@@ -53,7 +53,7 @@
 
 						<input type="hidden" name="id" value="${gueryToEdit.id}" />
 						<br>
-						<input type="submit" value="Save" class="btn btn-success pull-right">
+						<input type="submit" value="Save" class="btn btn-success">
 				</form>
 						
 			</div>

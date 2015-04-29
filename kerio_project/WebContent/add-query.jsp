@@ -30,7 +30,7 @@
 		<div class="row">			
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-				<h1 class="page-header">Add query</h1>
+				<h1 class="page-header">Add statistic</h1>
 
 				<form action="add-query" method="post" >
 						<label>Name:</label>  (required)
@@ -41,8 +41,8 @@
 						 
 						<label>Query:</label>  (required)
 						<input type="text" name="statement" class="form-control" required> 
-						
-						<input type="submit" value="add query" class="btn">
+						<br>
+						<input type="submit" value="Save" class="btn btn-success">
 				</form>		
 			</div>
 		</div>
