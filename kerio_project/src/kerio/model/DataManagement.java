@@ -1,9 +1,11 @@
 package kerio.model;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-
+import java.io.UnsupportedEncodingException;
 import java.sql.*;
 
 import javax.servlet.ServletContext;
@@ -52,9 +54,11 @@ public class DataManagement extends DbConnection{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-/*		PrintWriter writer;
+		
+		PrintWriter writer;
 		try {
-			writer = new PrintWriter("WebContent/data/test1.json",
+			File f = new File("C:/Users/karel/Desktop/test.json");
+			writer = new PrintWriter(f,
 					"UTF-8");
 			if(result != null){
 				writer.println(resultJson);
@@ -66,7 +70,7 @@ public class DataManagement extends DbConnection{
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		return resultJson;
 	}
 	
@@ -96,33 +100,46 @@ public class DataManagement extends DbConnection{
 
 		JSONArray jArray = new JSONArray();
 		JSONObject jObjDevice = new JSONObject();
+		JSONObject jTypes = new JSONObject();
 		int rows = 0;
+		boolean haveTypes = false;
+		String[] types = null;
 		// PrintStream out = System.out;
 		try {
 			while (result.next()) {
 				ResultSetMetaData rsmd = result.getMetaData();
 				JSONObject jObj = new JSONObject();
-				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+				int cols = rsmd.getColumnCount();
+				if(!haveTypes){
+					types = new String[cols];
+				}
+				for (int i = 1; i <= cols; i++) {
 					int type = rsmd.getColumnType(i);
 					if (type == Types.BIGINT || type == Types.INTEGER) {
 						// out.print("integer: "+result.getInt(i));
+						if(!haveTypes) jTypes.put(rsmd.getColumnLabel(i), "number");
 						jObj.put(rsmd.getColumnLabel(i), result.getInt(i));
 					} else if (type == Types.DECIMAL) {
 						// out.print("decimal: "+result.getBigDecimal(i));
+						if(!haveTypes) jTypes.put(rsmd.getColumnLabel(i), "number");;
 						jObj.put(rsmd.getColumnLabel(i),
 								result.getBigDecimal(i));
 					} else {
 						// out.print("Neco jinyho: "+result.getString(i));
+						if(!haveTypes) jTypes.put(rsmd.getColumnLabel(i), "string");;
 						jObj.put(rsmd.getColumnLabel(i), result.getString(i));
 
 					}
 				}
+				haveTypes = true;
 				jArray.put(jObj);
 				// out.println();
 				rows++;
 			}
 			System.out.println("Number of rows: "+ rows);
+			
 			jObjDevice.put("data", jArray);
+			jObjDevice.put("dataType", jTypes);
 			
 		} catch (org.json.JSONException e) {
 			e.printStackTrace();
