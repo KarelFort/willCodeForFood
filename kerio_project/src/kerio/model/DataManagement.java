@@ -55,7 +55,7 @@ public class DataManagement extends DbConnection{
 			e1.printStackTrace();
 		}
 		
-		PrintWriter writer;
+/*		PrintWriter writer;
 		try {
 			File f = new File("C:/Users/karel/Desktop/test.json");
 			writer = new PrintWriter(f,
@@ -70,7 +70,7 @@ public class DataManagement extends DbConnection{
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		return resultJson;
 	}
 	
