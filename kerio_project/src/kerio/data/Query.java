@@ -6,6 +6,8 @@ public class Query {
 	private String name;
 	private String statement;
 	private String info;
+	private String minDate;
+	private String maxDate;
 	
 
 	public int getId() {
@@ -40,5 +42,20 @@ public class Query {
 		this.info = info;
 	}
 	
+	public String getMinDate(){
+		return this.minDate;
+	}
+	
+	public void setMinDate(String minDate){
+		this.minDate = minDate;
+	}
+	
+	public String getMaxDate(){
+		return this.maxDate;
+	}
+	
+	public void setMaxDate(String maxDate){
+		this.maxDate = maxDate;
+	}
 	
 }

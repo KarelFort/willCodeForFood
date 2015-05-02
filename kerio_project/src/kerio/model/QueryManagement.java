@@ -4,7 +4,9 @@ package kerio.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -23,6 +25,33 @@ public class QueryManagement extends DbConnection{
 		// TODO Auto-generated constructor stub
 	}
 
+	public Query getQueryWithDate(int id){
+		Query query = getQuery(id);
+		
+		String getStatement = "SELECT MIN(TIMESTAMP) AS minDate, MAX(TIMESTAMP) AS maxDate FROM Clients";
+		ResultSet result;
+		if(stmnt != null){
+		try {
+			result = stmnt.executeQuery(getStatement);
+			result.next();
+			Date dateMin = result.getTimestamp("minDate");
+			Date dateMax = result.getTimestamp("maxDate");
+			String dateStringMin = new SimpleDateFormat("yyyy-MM-dd").format(dateMin);
+			String dateStringMax = new SimpleDateFormat("yyyy-MM-dd").format(dateMax);
+			query.setMinDate(dateStringMin);
+			query.setMaxDate(dateStringMax);
+			
+			System.out.println("date1 : "+query.getMinDate());
+			System.out.println("date2 : "+query.getMaxDate());
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		}
+		
+		return query;
+	}
+	
 /**
  * Insert new query to database
  * @param statement
