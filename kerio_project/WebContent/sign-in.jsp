@@ -40,7 +40,7 @@
 				<br>
 				<form action="sign-in" method="post">
 					<label>Password:</label> (required) 
-					<input type="text" name="password" class="form-control" required> 
+					<input type="password" name="password" class="form-control" required> 
 					<br>
 					<input type="submit" value="Sign in" class="btn">
 				</form>
