@@ -1,4 +1,17 @@
 $(document).ready(function() {
+//	var queryId = getUrlVars()["id"];
+
+//	function getUrlVars() {
+//	var vars = {};
+//	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+//	vars[key] = value;
+//	});
+//	return vars;
+//	}
+
+
+
+
 	$(function() {
 
 		var dateFrom;
@@ -44,12 +57,12 @@ $(document).ready(function() {
 			success: function (data) {
 
 				var jsondata = data["data"];
-				
+
 				if (jsondata.length > 1 ) {			
 
 					var countCol = 0;
 					var arrayColNames = [];
-					
+
 					// get column names and draw datatable header
 					for (var key in jsondata[0]){
 						arrayColNames.push({"data": key});
@@ -97,19 +110,20 @@ $(document).ready(function() {
 		})
 	});
 
-	function fnAlert(idAlert, alertType, text, duration) {
-		$(idAlert).append('<div class="alert alert-'+ alertType +'" id="alert">'
-				+ '<button type="button" class="close" data-dismiss="alert">'
-				+ '<span aria-hidden="true">&times;</span><span class="sr-only">Zavřít</span></button>'
-				+ text +'</div>');
-
-		var timeout = window.setTimeout(function () {
-			// close pop-up alert
-			$('#alert').slideUp(500, function () {
-				$('#alert').alert('close');
-				clearTimeout(timeout);
-			});
-		}, duration);
-		return;
-	}
 });
+
+function fnAlert(idAlert, alertType, text, duration) {
+	$(idAlert).append('<div class="alert alert-'+ alertType +'" id="alert">'
+			+ '<button type="button" class="close" data-dismiss="alert">'
+			+ '<span aria-hidden="true">&times;</span><span class="sr-only">Zavřít</span></button>'
+			+ text +'</div>');
+
+	var timeout = window.setTimeout(function () {
+		// close pop-up alert
+		$('#alert').slideUp(500, function () {
+			$('#alert').alert('close');
+			clearTimeout(timeout);
+		});
+	}, duration);
+	return;
+}

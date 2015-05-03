@@ -44,7 +44,6 @@ public class QueryDatepicker extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int id = Integer.parseInt(request.getParameter("id"));
-		System.out.println("Query id = "+ id);
 
 		QueryManagement queries = null;
 		try {
