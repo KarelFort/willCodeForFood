@@ -15,7 +15,7 @@
 			
 			<div id="navbar" class="navbar-collapse collapse navbar-inverse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="administration">Administration</a></li>
+					<li class="li-higher"><a href="administration"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Administration</a></li>
 				</ul>
 			</div>
 		</div>

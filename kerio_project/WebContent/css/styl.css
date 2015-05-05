@@ -17,11 +17,19 @@
 	padding-bottom: 14px;
 }
 
-.navbar, .navbar div, .navbar-brand, .navbar-header {
-	min-height: 50px;
-	max-height: 50px;
-	height: 50px;
-	font-size: 16px; 
+/* .navbar, .navbar div, .navbar-brand, .navbar-header { */
+/* 	min-height: 50px; */
+/* 	max-height: 50px; */
+/* 	height: 50px; */
+/* 	font-size: 16px;  */
+/* } */
+
+.li-higher {
+	padding: 5px;
+}
+
+.li-lower {
+	padding: 4px !important;
 }
 
 
