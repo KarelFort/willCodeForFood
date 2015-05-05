@@ -1,31 +1,25 @@
 $(document).ready(function() {
-//	var queryId = getUrlVars()["id"];
 
-//	function getUrlVars() {
-//	var vars = {};
-//	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-//	vars[key] = value;
-//	});
-//	return vars;
-//	}
+	var dateFrom;
+	var dateTo;
+	var id;
 
+	var today = new Date();
+	var defaultTo = formatDate(today);
+	$("#datepicker-to").val(defaultTo);
+	var defaultFrom = formatDate(today.setMonth(today.getMonth() - 2));
+	$("#datepicker-from").val(defaultFrom);
 
-
-
-	$(function() {
-
-		var dateFrom;
-		var dateTo;
-		var id;
-
-		$("#datepicker-from").datepicker({
-			dateFormat: 'yy-mm-dd',
-		});
-
-		$("#datepicker-to").datepicker({
-			dateFormat: 'yy-mm-dd',
-		});
+	$("#datepicker-from").datepicker({
+		dateFormat: 'yy-mm-dd',
+		maxDate: '0'
 	});
+
+	$("#datepicker-to").datepicker({
+		dateFormat: 'yy-mm-dd',
+		maxDate: '0',
+	});
+
 
 	$("#btn-execute").click(function() {
 
@@ -61,25 +55,30 @@ $(document).ready(function() {
 				if (jsondata.length > 1 ) {			
 
 					var countCol = 0;
-					var arrayColNames = [];
+					var aoColNames = new Array();	
+					var aColNames = new Array();
 
 					// get column names and draw datatable header
 					for (var key in jsondata[0]){
-						arrayColNames.push({"data": key});
+						aoColNames.push({"data": key});
+						aColNames.push(key);
 						$("#table-header").append("<th>" + key + "</th>");
 						countCol++;
 					}
+
+					var tableSorting = isInArray(aColNames);			
 
 					// draw datatable body with data
 					if (!$.fn.DataTable.isDataTable('#table')) {
 						var table =	$('#table').dataTable({
 							"data": jsondata,
-							"columns": arrayColNames,
+							"columns": aoColNames,
 							"destroy": true,
-							aoColumnDefs: [{
+							"aoColumnDefs": [{
 								bSortable: true,
 //								aTargets: [-1, -2, -3] // disable sorting on last three columns (icons)
-							}]
+							}],
+							"order": tableSorting,
 						});
 						return;
 					}
@@ -87,12 +86,13 @@ $(document).ready(function() {
 					else {
 						var table =	$('#table').dataTable({
 							"data": jsondata,
-							"columns": arrayColNames,
+							"columns": aoColNames,
 							"destroy": true,
-							aoColumnDefs: [{
+							"aoColumnDefs": [{
 								bSortable: true,
 //								aTargets: [-1, -2, -3] // disable sorting on last three columns (icons)
-							}]
+							}],
+							"order": [[ 0, "desc" ]]
 						});
 					}
 
@@ -111,6 +111,39 @@ $(document).ready(function() {
 	});
 
 });
+
+
+function isInArray(aoColNames) {
+	if (aoColNames.indexOf("Count") > -1) {
+		var index = aoColNames.indexOf("Count");
+		return [index,'desc'];
+	}
+
+	if (aoColNames.indexOf("Percentage") > -1) {
+		var index = aoColNames.indexOf("Percentage");
+		return [index,'desc'];
+	}
+
+	else {
+		alert("I found nothing");
+		return [1,'desc'];
+	}  
+}
+
+
+function formatDate(date) {
+	var d = new Date(date),
+	month = '' + (d.getMonth() + 1),
+	day = '' + d.getDate(),
+	year = d.getFullYear();
+
+	if (month.length < 2) month = '0' + month;
+	if (day.length < 2) day = '0' + day;
+
+	return [year, month, day].join('-');
+}
+
+
 
 function fnAlert(idAlert, alertType, text, duration) {
 	$(idAlert).append('<div class="alert alert-'+ alertType +'" id="alert">'
