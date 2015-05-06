@@ -1,5 +1,7 @@
 $(document).ready(function() {
+	$("#div-chartpicker").hide();
 
+	/* jQuery datepicker (calendar) */
 	var dateFrom;
 	var dateTo;
 	var id;
@@ -20,7 +22,7 @@ $(document).ready(function() {
 		maxDate: '0',
 	});
 
-
+	/* Show statistic */
 	$("#btn-execute").click(function() {
 
 		dateFrom = $("#datepicker-from").val();
@@ -50,17 +52,52 @@ $(document).ready(function() {
 
 			success: function (data) {
 
-				var jsondata = data["data"];
+				//prepare data for datatable and chart
+				var jsonData = data["data"];
+				var jsonDataType = data["dataType"];
 
-				if (jsondata.length > 1 ) {			
+				if (jsonData.length > 1 ) {
 
+
+					//set datatypes used in DB to selectors
+					var aTextType = ["string", "varchar"];
+					var aNumType = ["int", "integer", "number"];
+					var colText, colNum;
+					
+					$("#div-chartpicker").show();
+
+					for (var j in jsonDataType){
+						if (aTextType.indexOf(jsonDataType[j]) > -1) {
+							$("#chart-selector-text").append("<option>" + j + "</option>");
+							colText = j;
+						}
+						
+						if (aNumType.indexOf(jsonDataType[j]) > -1) {
+							$("#chart-selector-number").append("<option>" + j + "</option>");
+							colNum = j;
+						}
+					}
+					
+
+					//handlers for change datetypes in chart
+					$("#chart-selector-text").change(function() {
+					});
+
+					$("#chart-selector-number").change(function() {
+					});
+					
+
+
+
+
+					/* Datatables */
 					var countCol = 0;
 					var aoColNames = new Array();	
 					var aColNames = new Array();
 
 					// get column names and draw datatable header
-					for (var key in jsondata[0]){
-						aoColNames.push({"data": key});
+					for (var key in jsonData[0]){
+						aoColNames.push({"data": key}); 
 						aColNames.push(key);
 						$("#table-header").append("<th>" + key + "</th>");
 						countCol++;
@@ -71,7 +108,7 @@ $(document).ready(function() {
 					// draw datatable body with data
 					if (!$.fn.DataTable.isDataTable('#table')) {
 						var table =	$('#table').dataTable({
-							"data": jsondata,
+							"data": jsonData,
 							"columns": aoColNames,
 							"destroy": true,
 							"aoColumnDefs": [{
@@ -82,10 +119,10 @@ $(document).ready(function() {
 						});
 						return;
 					}
-					// destroy and draw new one
+					//destroy and draw new one
 					else {
 						var table =	$('#table').dataTable({
-							"data": jsondata,
+							"data": jsonData,
 							"columns": aoColNames,
 							"destroy": true,
 							"aoColumnDefs": [{
@@ -131,32 +168,3 @@ function isInArray(aoColNames) {
 }
 
 
-function formatDate(date) {
-	var d = new Date(date),
-	month = '' + (d.getMonth() + 1),
-	day = '' + d.getDate(),
-	year = d.getFullYear();
-
-	if (month.length < 2) month = '0' + month;
-	if (day.length < 2) day = '0' + day;
-
-	return [year, month, day].join('-');
-}
-
-
-
-function fnAlert(idAlert, alertType, text, duration) {
-	$(idAlert).append('<div class="alert alert-'+ alertType +'" id="alert">'
-			+ '<button type="button" class="close" data-dismiss="alert">'
-			+ '<span aria-hidden="true">&times;</span><span class="sr-only">Zavřít</span></button>'
-			+ text +'</div>');
-
-	var timeout = window.setTimeout(function () {
-		// close pop-up alert
-		$('#alert').slideUp(500, function () {
-			$('#alert').alert('close');
-			clearTimeout(timeout);
-		});
-	}, duration);
-	return;
-}

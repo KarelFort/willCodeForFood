@@ -60,8 +60,12 @@
 							<h5 id="description">${queryDatepicker.info}</h5>
 						</div>
 						<div class="tab-pane fade" id="tab2">
-							<h5 id="query"><textarea rows="7" cols="50" name="statement" class="form-control" readonly="readonly" style="background-color: white">${queryDatepicker.statement}</textarea></h5>
-							
+							<h5 id="query">
+								<textarea rows="7" cols="50" name="statement"
+									class="form-control" readonly="readonly"
+									style="background-color: white">${queryDatepicker.statement}</textarea>
+							</h5>
+
 						</div>
 					</div>
 				</div>
@@ -73,27 +77,29 @@
 						id="datepicker-query-id" value="${queryDatepicker.id}" /> <br>
 
 					<div style="padding: 0px">
-					
+
 						<h5>From</h5>
-						
+
 						<div class="input-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
 							<input type="text" class="form-control" id="datepicker-from"
-								name="datepicker-from" style="cursor: pointer; background-color: white"
-								placeholder="yyyy-mm-dd" readonly="readonly"> 
-							<label class="input-group-addon btn" for="datepicker-from"> 
-								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+								name="datepicker-from"
+								style="cursor: pointer; background-color: white"
+								placeholder="yyyy-mm-dd" readonly="readonly"> <label
+								class="input-group-addon btn" for="datepicker-from"> <span
+								class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</label>
 						</div>
 						<!-- /input-group -->
-						
+
 						<h5>To</h5>
-						
+
 						<div class="input-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
 							<input type="text" class="form-control" id="datepicker-to"
-								name="datepicker-to" style="cursor: pointer; background-color: white"
-								placeholder="yyyy-mm-dd" readonly="readonly"> 
-							<label class="input-group-addon btn" for="datepicker-to"> 
-								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+								name="datepicker-to"
+								style="cursor: pointer; background-color: white"
+								placeholder="yyyy-mm-dd" readonly="readonly"> <label
+								class="input-group-addon btn" for="datepicker-to"> <span
+								class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</label>
 
 						</div>
@@ -122,13 +128,40 @@
 					</table>
 				</div>
 
-				<div id="div-chart">
-					<!-- 					<h4>Chart</h4> -->
-					<div id="chart"></div>
+				<br>
+				
+				<div id="div-chartpicker">
+					<b>Select columns</b>
+
+					<div class="input-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<select class="form-control " id="chart-selector-text">
+						</select>
+					</div>
+					<!-- /input-group -->
+					<br>
+					<div class="input-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<select class="form-control " id="chart-selector-number">
+						</select>
+					</div>
+					<!-- /input-group -->
 				</div>
+
+				<!-- /.col-lg-6 -->
+				<br>
+			</div>
+
+
+
+
+			<div id="div-chart">
+				<!-- 					<h4>Chart</h4> -->
+				<div id="chart"></div>
 			</div>
 		</div>
 	</div>
+	</div>
+	<script type="text/javascript" language="javascript" 
+		src="js/util.js"></script>
 	<script type="text/javascript" language="javascript"
 		src="js/datepicker.js"></script>
 	<script type="text/javascript" language="javascript"

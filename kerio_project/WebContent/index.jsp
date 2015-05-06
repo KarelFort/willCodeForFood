@@ -61,10 +61,6 @@
 
 				<p>Database updated 2015-04-12 in 16:55</p>
 			</div>
-
-			<!-- 	<script type="text/javascript" language="javascript" -->
-			<!-- 		src="js/pieChart.js"></script> -->
-
 		</div>
 	</div>
 </body>
