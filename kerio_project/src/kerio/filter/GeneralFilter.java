@@ -42,7 +42,7 @@ public class GeneralFilter implements Filter {
 		// changing type of request
 		HttpServletRequest req = (HttpServletRequest) request;
 
-		// zmena kodovani kvuli datum z formularu
+		// changing coding to UTF-8
 		req.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 
