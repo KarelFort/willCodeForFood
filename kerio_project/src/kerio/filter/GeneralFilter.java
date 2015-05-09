@@ -42,10 +42,16 @@ public class GeneralFilter implements Filter {
 		// changing type of request
 		HttpServletRequest req = (HttpServletRequest) request;
 
-		// if I have any meesage in session, I add it to the request and remove from session
+		// zmena kodovani kvuli datum z formularu
+		req.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+
+		// if I have any meesage in session, I add it to the request and remove
+		// from session
 		// message will be displayed in JSP
 		if (req.getSession().getAttribute("message") != null) {
-			String message = req.getSession().getAttribute("message").toString();
+			String message = req.getSession().getAttribute("message")
+					.toString();
 			String message_type = req.getSession().getAttribute("message_type")
 					.toString();
 

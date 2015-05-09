@@ -39,12 +39,13 @@ public class AdminManagement extends DbConnection {
 		}
 		return passwordInfo;
 	}
-	
+
 	/**
 	 * checks, if the password for signin is correct
-	 * @return boolean 
+	 * 
+	 * @return boolean
 	 */
-	public boolean passwordIsCorrect(String password) {		
+	public boolean passwordIsCorrect(String password) {
 		String passwordFromDB = null;
 		String getStatement = "SELECT value FROM client_statistics.settings WHERE name = 'password'";
 		ResultSet result;
@@ -56,12 +57,12 @@ public class AdminManagement extends DbConnection {
 			e.printStackTrace();
 		}
 		String hashedPassword = doHash(password);
-		if (hashedPassword.equals(passwordFromDB)){
+		if (hashedPassword.equals(passwordFromDB)) {
 			return true;
 		} else {
 			return false;
 		}
-		
+
 	}
 
 	/**
@@ -105,6 +106,25 @@ public class AdminManagement extends DbConnection {
 		}
 	}
 
-	
+	/**
+	 * returns the time from table logs, when was the database for the
+	 * last time updated sucessfully
+	 * 
+	 * @return
+	 */
+	public String getDatabaseLastUpdate() {
+		String lastUpdate = null;
+		String getStatement = "SELECT time FROM client_statistics.logs WHERE finished = 1 ORDER BY time DESC LIMIT 0,1";
+		ResultSet result;
+		try {
+			result = stmnt.executeQuery(getStatement);
+			result.next();
+			lastUpdate = result.getString("time");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lastUpdate;
+
+	}
 
 }

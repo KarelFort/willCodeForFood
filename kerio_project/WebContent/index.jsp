@@ -54,12 +54,12 @@
 
 				<p>Welcome to ClientStatistics application, analytical and
 					reporting tool for KerioConnect product.</p>
-				<p>Select query from the side menu for displying query. Click on
+				<p>Select query from the side menu for displaying query. Click on
 					Admin button for creating, editing and deleting queries.</p>
 
 				<br>
 
-				<p>Database updated 2015-04-12 in 16:55</p>
+				<p>Database updated ${lastUpdate}</p>
 			</div>
 
 			<!-- 	<script type="text/javascript" language="javascript" -->
