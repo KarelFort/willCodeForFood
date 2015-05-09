@@ -61,10 +61,6 @@
 
 				<p>Database updated ${lastUpdate}</p>
 			</div>
-
-			<!-- 	<script type="text/javascript" language="javascript" -->
-			<!-- 		src="js/pieChart.js"></script> -->
-
 		</div>
 	</div>
 </body>

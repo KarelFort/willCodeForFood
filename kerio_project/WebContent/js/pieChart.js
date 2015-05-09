@@ -1,69 +1,71 @@
-(function(d3) {
-	'use strict';
+/* Chart was created with help of http://zeroviscosity.com/d3-js-step-by-step/step-0-intro*/
 
-	var width = 450;
-	var height = 450;
-	var donutWidth = 100;
-	var radius = Math.min(width, height) / 2;
-	var legendRectSize = 18;			//size of colored squares
-	var legendSpacing = 4;					
+function createChart(data) {
 
-	var color = d3.scale.category20c();	//color scale
+	(function(d3) {
+		'use strict';
 
-	var svg = d3.select('#chart')		//retrieve the DOM element
-	.append('svg')						//append an svg element to the element we've selected
-	.attr('width', width)
-	.attr('height', height)
-	.append('g')
-	.attr('transform', 'translate(' + (width / 2) + 
-			',' + (height / 2) + ')');
+		var height = 500;
+		var width = height * 1.6;
+		var donutWidth = 150;
+		var radius = Math.min(width, height) / 2;
+		var legendRectSize = 18;			//size of colored squares (legend)
+		var legendSpacing = 4;					
 
-	var arc = d3.svg.arc()				//define radius, which determines the size of the overall chart
-	.innerRadius(radius - donutWidth)  	//create donut hole
-	.outerRadius(radius);
+		var dataReduced = new Array();
+		var selectedText = $('#chart-selector-text').val();
+		var selectedNum = $('#chart-selector-number').val();
 
-	var pie = d3.layout.pie()			//start and end angles of the segments
-	.value(function(d) { return d.count; })
-	.sort(null);
+		prepareData(data, dataReduced, selectedText, selectedNum);
 
-	var tooltip = d3.select('#chart')           
-	.append('div')                            
-	.attr('class', 'chart_tooltip');             
+		var color = d3.scale.category20c();	//color scale
 
-	tooltip.append('div')                      
-	.attr('class', 'device');                 
+		var svg = d3.select('#chart')		//retrieve the DOM element
+		.append('svg')						//append an svg element to the element we've selected
+		.attr('width', width)
+		.attr('height', height)
+		.append('g')
+		.attr('transform', 'translate(' + (width / 3) + 
+				',' + (height / 2) + ')');
 
-	tooltip.append('div')                      
-	.attr('class', 'count');                
+		var arc = d3.svg.arc()				//define radius, which determines the size of the overall chart
+		.innerRadius(radius - donutWidth)  	//create donut hole
+		.outerRadius(radius);
 
-	tooltip.append('div')                      
-	.attr('class', 'percent');    
+		var pie = d3.layout.pie()			//start and end angles of the segments
+		.value(function(d) { 
+			return d.selectedNum; })
+			.sort(null);
 
+		var tooltip = d3.select('#chart')           
+		.append('div')                            
+		.attr('class', 'chart-tooltip');             
 
-	d3.json('data/chart_result.json', function(error, dataset) {
-		dataset.forEach(function(d) {
-			d.count = +d.count;
-			d.enabled = true;
-		});
+		tooltip.append('div')                      
+		.attr('class', 'selectedText');                 
 
+		tooltip.append('div')                       
+		.attr('class', 'selectedNum');  
 
-		var path = svg.selectAll('path')
-		.data(pie(dataset))
+		tooltip.append('div')                      
+		.attr('class', 'percent');
+
+		var path = svg.selectAll('path') 	
+		.data(pie(dataReduced))				
 		.enter()
 		.append('path')
 		.attr('d', arc)
 		.attr('fill', function(d, i) { 
-			return color(d.data.device);
+			return color(d.data.selectedText);
 		})
-		.each(function(d) { this._current = d; });
 
-		path.on('mouseover', function(d) {				//mouseover event handler
-			var total = d3.sum(dataset.map(function(d) {
-				return (d.enabled) ? d.count : 0;
+		path.on('mouseover', function(d) {			
+			var total = d3.sum(dataReduced.map(function(d) {
+				return d.selectedNum;
 			}));
-			var percent = Math.round(1000 * d.data.count / total) / 10;
-			tooltip.select('.device').html(d.data.device);
-			tooltip.select('.count').html(d.data.count); 
+			var percent = Math.round(1000 * d.data.selectedNum / total) / 10;
+			tooltip.select('.selectedText').html(d.data.selectedText);
+			tooltip.select('.selectedNum').html(d.data.selectedNum); 
 			tooltip.select('.percent').html(percent + '%'); 
 			tooltip.style('display', 'block');
 		});
@@ -72,24 +74,17 @@
 			tooltip.style('display', 'none');                       
 		}); 
 
-		/* OPTIONAL 
-    path.on('mousemove', function(d) {                          
-      tooltip.style('top', (d3.event.pageY + 10) + 'px')          
-        .style('left', (d3.event.pageX + 10) + 'px');            
-    });                                                         
-		 */
-
-		var legend = svg.selectAll('.chart_legend')
+		var legend = svg.selectAll('#chart-legend')
 		.data(color.domain())
 		.enter()
 		.append('g')
-		.attr('class', 'chart_legend')
+		.attr('class', 'chart-legend')
 		.attr('transform', function(d, i) {
-			var height = legendRectSize + legendSpacing;
-			var offset =  height * color.domain().length / 2;
-			var horz = -2 * legendRectSize;
-			var vert = i * height - offset;
-			return 'translate(' + horz + ',' + vert + ')';
+			var sqHeight = legendRectSize + legendSpacing;	//colored square
+			var offset =  0	//height of square*number of records / 2
+			var horz = height / 2 + 30;
+			var vert = i * sqHeight - height / 2;
+			return 'translate(' + horz + ',' + vert + ')'; 
 		});
 
 		legend.append('rect')
@@ -97,45 +92,71 @@
 		.attr('height', legendRectSize)
 		.style('fill', color)
 		.style('stroke', color)
-		.on('click', function(device) {
-			var rect = d3.select(this);
-			var enabled = true;
-			var totalEnabled = d3.sum(dataset.map(function(d) {
-				return (d.enabled) ? 1 : 0;
-			}));
 
-			if (rect.attr('class') === 'disabled') {
-				rect.attr('class', '');
-			} else {
-				if (totalEnabled < 2) return;
-				rect.attr('class', 'disabled');
-				enabled = false;
-			}
-
-			pie.value(function(d) {
-				if (d.device === device) d.enabled = enabled;
-				return (d.enabled) ? d.count : 0;
-			});
-
-			path = path.data(pie(dataset));
-
-			path.transition()
-			.duration(750)
-			.attrTween('d', function(d) {
-				var interpolate = d3.interpolate(this._current, d);
-				this._current = interpolate(0);
-				return function(t) {
-					return arc(interpolate(t));
-				};
-			});
-		});
 
 		legend.append('text')
 		.attr('x', legendRectSize + legendSpacing)
 		.attr('y', legendRectSize - legendSpacing)
-		.text(function(d) { return d; });
+		.text(function(d) {
 
+			for (var k in dataReduced) {
+				var kk = dataReduced[k];
+				var number;
 
-	}); 
+				if (kk.selectedText == d) {
+					number = kk.selectedNum
+				}
+			}
 
-})(window.d3);
+			var total = d3.sum(dataReduced.map(function(d) {
+				return d.selectedNum;
+			}));
+			var percent = Math.round(1000 * number / total) / 10;
+
+			return percent + " % | " + d  ;
+		});
+
+	})(window.d3);
+}
+
+function removeChart() {
+	d3.select("svg")
+	.remove();
+}
+
+function prepareData(data, dataReduced, selectedText, selectedNum) {
+
+	var itemReduced;
+	var aSelectedValues = new Array();
+
+	//create ao of selectedText and selectedNum
+	for (var aKey in data) {
+		var objItem = data[aKey];
+		var objTemp = {};
+		for (var oKey in objItem) {
+			if (oKey == selectedText){
+				objTemp["selectedText"] = objItem[oKey];	
+			}	
+			if (oKey == selectedNum){
+				objTemp["selectedNum"] = objItem[oKey];
+			}	
+		}
+		aSelectedValues.push(objTemp);
+	}	
+
+	// sum same values
+	var temp = {};
+	var obj = null;
+	for (var i = 0; i < aSelectedValues.length; i++) {
+		obj = aSelectedValues[i];
+
+		if(!temp[obj.selectedText]) {
+			temp[obj.selectedText] = obj;
+		} else {
+			temp[obj.selectedText].selectedNum += obj.selectedNum;
+		}
+	}
+	for (var prop in temp) {
+		dataReduced.push(temp[prop]);
+	}
+}

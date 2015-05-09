@@ -49,7 +49,7 @@
 						 
 						<label>Query:</label>  (required)
 						
-						<textarea rows="4" cols="50" name="statement" class="form-control" value="${gueryToEdit.statement}" required>${gueryToEdit.statement}</textarea>					
+						<textarea rows="7" cols="50" name="statement" class="form-control" value="${gueryToEdit.statement}" required>${gueryToEdit.statement}</textarea>					
 
 						<input type="hidden" name="id" value="${gueryToEdit.id}" />
 						<br>

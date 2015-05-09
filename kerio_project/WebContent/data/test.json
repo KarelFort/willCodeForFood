@@ -1,1 +1,8 @@
-{"dataType":{"Percentage":"number","Count":"number","Client":"string"},"data":[{"Percentage":85.4644,"Count":2834,"Client":"ActiveSync 12.1"},{"Percentage":14.0531,"Count":466,"Client":"ActiveSync 12.0"},{"Percentage":0.4825,"Count":16,"Client":"ActiveSync 2.5"}]}
+{
+"dataType":
+		{"Percentage":"number","Count":"number","Client":"string"},
+"data":[
+		{"Percentage":85.4644,"Count":2834,"Client":"ActiveSync 12.1"},
+		{"Percentage":14.0531,"Count":466,"Client":"ActiveSync 12.0"},
+		{"Percentage":0.4825,"Count":16,"Client":"ActiveSync 2.5"}
+		]}

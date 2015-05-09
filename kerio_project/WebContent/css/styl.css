@@ -17,46 +17,53 @@
 	padding-bottom: 14px;
 }
 
-.navbar, .navbar div, .navbar-brand, .navbar-header {
-	min-height: 60px;
-	max-height: 60px;
-	height: 60px;
-	font-size: 16px; 
+.li-higher {
+	padding: 5px;
 }
 
-
+.li-lower {
+	padding: 4px !important;
+}
 
 #chart {
-  height: 360px;
-  margin: 0 auto; 
+  height: 500px;
   position: relative;
-  width: 360px;
+  width: 1000px;
 }
 
-.chart_tooltip {
-  background: #eee;
-  box-shadow: 0 0 5px #999999;
-  color: #333;
-  display: none;
-  font-size: 12px;
-  left: 160px;
-  padding: 10px;
-  position: absolute;
-  text-align: center;
-  top: 95px;
-  width: 150px;
-  z-index: 10;
+.chart-tooltip {
+	background: #eee;
+	box-shadow: 0 0 5px #999999;
+	color: #333;
+	display: none;
+	font-size: 12px;
+	left: 193px;
+	padding: 10px;
+	position: absolute;
+	text-align: center;
+	top: 210px;
+	width: 150px;
+	z-index: 10;
+	overflow: hidden;
 }
 
-.chart_legend {
-    font-size: 12px;
-  }
+.chart-legend {
+	font-size: 12px;
+}
+#div-chartpicker {
+		height: 100%;
+}
 
 rect {
 	cursor: pointer;
 	stroke-width: 2;
 }
 
-rect.disabled { 
-	fill: transparent !important; 
+rect.disabled {
+	fill: transparent !important;
+}
+
+.no-padding {
+	padding: 0px;
+	padding-bottom: 15px
 }

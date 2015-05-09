@@ -41,8 +41,8 @@ public class QueryManagement extends DbConnection{
 			query.setMinDate(dateStringMin);
 			query.setMaxDate(dateStringMax);
 			
-			System.out.println("date1 : "+query.getMinDate());
-			System.out.println("date2 : "+query.getMaxDate());
+//			System.out.println("date1 : "+query.getMinDate());
+//			System.out.println("date2 : "+query.getMaxDate());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
