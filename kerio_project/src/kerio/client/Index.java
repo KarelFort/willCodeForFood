@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kerio.data.Query;
+import kerio.model.AdminManagement;
 import kerio.model.QueryManagement;
 
 /**
@@ -32,16 +33,24 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		QueryManagement queries = null;
+		List<Query> allQueries = null;
 		try {
-			queries = new QueryManagement(getServletContext());
+			QueryManagement queries = new QueryManagement(getServletContext());
+			allQueries = queries.getAllQueries();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		List<Query> allQueries = queries.getAllQueries();
+		}		
+		
+		String lastUpdate = null;
+		try {
+			AdminManagement admins = new AdminManagement(getServletContext());
+			lastUpdate = admins.getDatabaseLastUpdate();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}		
 		
 		request.setAttribute("allQueries", allQueries);
+		request.setAttribute("lastUpdate", lastUpdate);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);
 	}
