@@ -60,14 +60,12 @@ $(document).ready(function() {
 				if (jsonData.length > 1 ) {
 
 					clickCount++;
-					
+
 					/** Pie chart **/
 					//set datatypes used in DB to selectors
 					var aTextType = ["string", "varchar"];
 					var aNumType = ["int", "integer", "number"];
 					var countText = 0, countNum = 0;
-
-
 
 					$("#div-chartpicker").show();
 
@@ -90,7 +88,7 @@ $(document).ready(function() {
 						removeChart();
 						createChart(jsonData); 
 					}
-					
+
 					//handlers for updating datetypes  in chart
 					$("#chart-selector-text").change(function() {
 						removeChart();
@@ -104,7 +102,7 @@ $(document).ready(function() {
 
 					/** Datatables **/
 					createTable(jsonData);
-					
+
 				}
 
 				else {
@@ -112,8 +110,8 @@ $(document).ready(function() {
 				}
 			},
 
-			failure: function(errMsg) {
-				alert(errMsg);
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				fnAlert('#datepicker-error', 'warning', 'No data found. Check the correctness of the query.', 3000);
 			}
 		})
 	});
@@ -135,5 +133,14 @@ function isInArray(aoColNames) {
 		return [1,'desc'];
 	}  
 }
+
+//handle errors
+$.ajaxSetup({
+	statusCode: {
+		500: function(data) {
+			alert("500 Internal Server Error. Check the correctness of the query.");
+		}    
+	}});
+
 
 

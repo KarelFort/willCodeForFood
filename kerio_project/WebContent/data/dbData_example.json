@@ -1,0 +1,6 @@
+{"data":[
+	{"Percentage":80.8696,"Count":372,"Client":"ActiveSync 12.1"},
+	{"Percentage":18.913,"Count":87,"Client":"ActiveSync 12.0"},
+	{"Percentage":0.2174,"Count":1,"Client":"ActiveSync 2.5"}],
+"dataType":
+	{"Percentage":"number","Count":"number","Client":"string"}}
