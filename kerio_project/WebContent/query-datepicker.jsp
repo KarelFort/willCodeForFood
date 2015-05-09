@@ -133,27 +133,30 @@
 
 				<div id="div-chartpicker">
 					<b>Select columns</b>
-
-					<div class="input-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<select class="form-control " id="chart-selector-text">
-						</select>
-					</div>
-					<!-- /input-group -->
 					<br>
-					<div class="input-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div
+						class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
+						<select class="form-control" id="chart-selector-text">
+						</select>
+
+					</div>
+					<div class=" row"></div>
+
+					<div
+						class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
 						<select class="form-control" id="chart-selector-number">
 						</select>
+
 					</div>
-					<!-- /input-group -->
+					
+					<div class=" row"></div>
 				</div>
 
-				<!-- /.col-lg-6 -->
 				<br>
 
 				<div id="div-chart">
 					<div id="chart"></div>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -162,6 +165,8 @@
 		src="js/datepicker.js"></script>
 	<script type="text/javascript" language="javascript"
 		src="js/pieChart.js"></script>
+			<script type="text/javascript" language="javascript"
+		src="js/dataTable.js"></script>
 
 </body>
 </html>

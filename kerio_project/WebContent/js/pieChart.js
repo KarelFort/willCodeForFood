@@ -1,19 +1,23 @@
+/* Chart was created with help of http://zeroviscosity.com/d3-js-step-by-step/step-0-intro*/
+
 function createChart(data) {
 
 	(function(d3) {
 		'use strict';
 
 		var height = 500;
-		var width = height * 1.5;
+		var width = height * 1.6;
 		var donutWidth = 150;
 		var radius = Math.min(width, height) / 2;
 		var legendRectSize = 18;			//size of colored squares (legend)
 		var legendSpacing = 4;					
 
 		var dataReduced = new Array();
-		
-		prepareData(data, dataReduced);
-		
+		var selectedText = $('#chart-selector-text').val();
+		var selectedNum = $('#chart-selector-number').val();
+
+		prepareData(data, dataReduced, selectedText, selectedNum);
+
 		var color = d3.scale.category20c();	//color scale
 
 		var svg = d3.select('#chart')		//retrieve the DOM element
@@ -33,28 +37,18 @@ function createChart(data) {
 			return d.selectedNum; })
 			.sort(null);
 
+		var tooltip = d3.select('#chart')           
+		.append('div')                            
+		.attr('class', 'chart-tooltip');             
 
-//		var tooltip = d3.select('#chart')           
-//		.append('div')                            
-//		.attr('class', 'chart_tooltip');             
+		tooltip.append('div')                      
+		.attr('class', 'selectedText');                 
 
-//		tooltip.append('div')                      
-//		.attr('class', selectedText);                 
+		tooltip.append('div')                       
+		.attr('class', 'selectedNum');  
 
-//		tooltip.append('div')                      
-//		.attr('class', selectedNum);  
-
-
-//		//if percentage neni v selecteNum, tak pridej procenta
-//		tooltip.append('div')                      
-//		.attr('class', 'percent');
-
-
-
-//		d3.json(dataReduced, function(error, dataset) {
-//		dataset.forEach(function(d) {	//d is item of data array
-//		d.enabled = true;
-//		});
+		tooltip.append('div')                      
+		.attr('class', 'percent');
 
 		var path = svg.selectAll('path') 	
 		.data(pie(dataReduced))				
@@ -64,29 +58,21 @@ function createChart(data) {
 		.attr('fill', function(d, i) { 
 			return color(d.data.selectedText);
 		})
-//		.each(function(d) { this._current = d; });
 
-//		path.on('mouseover', function(d) {				//mouseover event handler
-//		var total = d3.sum(dataReduced.map(function(d) {
-//		return (d.enabled) ? d.selectedNum : 0;
-//		}));
-//		var percent = Math.round(1000 * d.data.selectedNum / total) / 10;
-//		tooltip.select('.selectedText').html(d.data.selectedText);
-//		tooltip.select('.selectedNum').html(d.data.selectedNum); 
-//		tooltip.select('.percent').html(percent + '%'); 
-//		tooltip.style('display', 'block');
-//		});
+		path.on('mouseover', function(d) {			
+			var total = d3.sum(dataReduced.map(function(d) {
+				return d.selectedNum;
+			}));
+			var percent = Math.round(1000 * d.data.selectedNum / total) / 10;
+			tooltip.select('.selectedText').html(d.data.selectedText);
+			tooltip.select('.selectedNum').html(d.data.selectedNum); 
+			tooltip.select('.percent').html(percent + '%'); 
+			tooltip.style('display', 'block');
+		});
 
-//		path.on('mouseout', function() {                           
-//		tooltip.style('display', 'none');                       
-//		}); 
-
-		/* OPTIONAL 
-    path.on('mousemove', function(d) {                          
-      tooltip.style('top', (d3.event.pageY + 10) + 'px')          
-        .style('left', (d3.event.pageX + 10) + 'px');            
-    });                                                         
-		 */
+		path.on('mouseout', function() {                           
+			tooltip.style('display', 'none');                       
+		}); 
 
 		var legend = svg.selectAll('#chart-legend')
 		.data(color.domain())
@@ -107,46 +93,28 @@ function createChart(data) {
 		.style('fill', color)
 		.style('stroke', color)
 
-//		.on('click', function(selectedText) {
-//		var rect = d3.select(this);
-//		var enabled = true;
-//		var totalEnabled = d3.sum(dataReduced.map(function(d) {
-//		return (d.enabled) ? 1 : 0;
-//		}));
-
-//		if (rect.attr('class') === 'disabled') {
-//		rect.attr('class', '');
-//		} else {
-//		if (totalEnabled < 2) return;
-//		rect.attr('class', 'disabled');
-//		enabled = false;
-//		}
-
-//		pie.value(function(d) {
-//		if (d.selectedText === selectedText) d.enabled = enabled;
-//		return (d.enabled) ? d.selectedNum : 0;
-//		});
-
-//		path = path.data(pie(dataReduced));
-
-//		path.transition()
-//		.duration(750)
-//		.attrTween('d', function(d) {
-//		var interpolate = d3.interpolate(this._current, d);
-//		this._current = interpolate(0);
-//		return function(t) {
-//		return arc(interpolate(t));
-//		};
-//		});
-//		});
 
 		legend.append('text')
 		.attr('x', legendRectSize + legendSpacing)
 		.attr('y', legendRectSize - legendSpacing)
-		.text(function(d) { return d; });
+		.text(function(d) {
 
+			for (var k in dataReduced) {
+				var kk = dataReduced[k];
+				var number;
 
-//		}); 
+				if (kk.selectedText == d) {
+					number = kk.selectedNum
+				}
+			}
+
+			var total = d3.sum(dataReduced.map(function(d) {
+				return d.selectedNum;
+			}));
+			var percent = Math.round(1000 * number / total) / 10;
+
+			return percent + " % | " + d  ;
+		});
 
 	})(window.d3);
 }
@@ -156,27 +124,39 @@ function removeChart() {
 	.remove();
 }
 
-function prepareData(data, dataReduced) {
-	var selectedText = $('#chart-selector-text').val();
-	var selectedNum = $('#chart-selector-number').val();
+function prepareData(data, dataReduced, selectedText, selectedNum) {
 
 	var itemReduced;
+	var aSelectedValues = new Array();
 
+	//create ao of selectedText and selectedNum
 	for (var aKey in data) {
-		var kk = data[aKey];
+		var objItem = data[aKey];
 		var objTemp = {};
-		for (var dd in kk) {
-			if (dd == selectedText){
-//				var keyTemp = dd;
-//				objTemp[keyTemp] = kk[dd];	
-				objTemp["selectedText"] = kk[dd];	
+		for (var oKey in objItem) {
+			if (oKey == selectedText){
+				objTemp["selectedText"] = objItem[oKey];	
 			}	
-			if (dd == selectedNum){
-//				var keyTemp = dd;
-//				objTemp[keyTemp] = kk[dd];	
-				objTemp["selectedNum"] = kk[dd];
+			if (oKey == selectedNum){
+				objTemp["selectedNum"] = objItem[oKey];
 			}	
 		}
-		dataReduced.push(objTemp);
+		aSelectedValues.push(objTemp);
 	}	
+
+	// sum same values
+	var temp = {};
+	var obj = null;
+	for (var i = 0; i < aSelectedValues.length; i++) {
+		obj = aSelectedValues[i];
+
+		if(!temp[obj.selectedText]) {
+			temp[obj.selectedText] = obj;
+		} else {
+			temp[obj.selectedText].selectedNum += obj.selectedNum;
+		}
+	}
+	for (var prop in temp) {
+		dataReduced.push(temp[prop]);
+	}
 }
