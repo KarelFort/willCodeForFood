@@ -33,6 +33,10 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		/**
+		 * get list of all queries from Db in alfabetical order
+		 * used for the list in left menu
+		 */
 		List<Query> allQueries = null;
 		try {
 			QueryManagement queries = new QueryManagement(getServletContext());
@@ -41,6 +45,9 @@ public class Index extends HttpServlet {
 			e.printStackTrace();
 		}		
 		
+		/**
+		 * get timestamp from table logs, when was the database updated for the last time
+		 */
 		String lastUpdate = null;
 		try {
 			AdminManagement admins = new AdminManagement(getServletContext());
