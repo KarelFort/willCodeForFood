@@ -109,11 +109,12 @@
 
 					<!-- /.col-lg-6 -->
 					<br>
+					<div>
+						<button type="button" class="btn btn-primary" id="btn-execute">Show
+							statistics</button>
+					</div>
 				</div>
-				<div>
-					<button type="button" class="btn btn-primary" id="btn-execute">Show
-						statistics</button>
-				</div>
+
 				<br> <br>
 
 				<div id="div-table">
@@ -129,7 +130,7 @@
 				</div>
 
 				<br>
-				
+
 				<div id="div-chartpicker">
 					<b>Select columns</b>
 
@@ -140,7 +141,7 @@
 					<!-- /input-group -->
 					<br>
 					<div class="input-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<select class="form-control " id="chart-selector-number">
+						<select class="form-control" id="chart-selector-number">
 						</select>
 					</div>
 					<!-- /input-group -->
@@ -148,20 +149,15 @@
 
 				<!-- /.col-lg-6 -->
 				<br>
-			</div>
 
+				<div id="div-chart">
+					<div id="chart"></div>
+				</div>
 
-
-
-			<div id="div-chart">
-				<!-- 					<h4>Chart</h4> -->
-				<div id="chart"></div>
 			</div>
 		</div>
 	</div>
-	</div>
-	<script type="text/javascript" language="javascript" 
-		src="js/util.js"></script>
+	<script type="text/javascript" language="javascript" src="js/util.js"></script>
 	<script type="text/javascript" language="javascript"
 		src="js/datepicker.js"></script>
 	<script type="text/javascript" language="javascript"

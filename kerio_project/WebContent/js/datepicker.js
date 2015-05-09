@@ -25,6 +25,7 @@ $(document).ready(function() {
 	/* Show statistic */
 	$("#btn-execute").click(function() {
 
+		var clickCount = 0;
 		dateFrom = $("#datepicker-from").val();
 		dateTo = $("#datepicker-to").val();
 		id = $("#datepicker-query-id").val();
@@ -58,37 +59,47 @@ $(document).ready(function() {
 
 				if (jsonData.length > 1 ) {
 
-
+					clickCount++;
 					//set datatypes used in DB to selectors
 					var aTextType = ["string", "varchar"];
 					var aNumType = ["int", "integer", "number"];
-					var colText, colNum;
-					
+					var countText = 0, countNum = 0;
+
+
+
 					$("#div-chartpicker").show();
 
-					for (var j in jsonDataType){
-						if (aTextType.indexOf(jsonDataType[j]) > -1) {
-							$("#chart-selector-text").append("<option>" + j + "</option>");
-							colText = j;
-						}
-						
-						if (aNumType.indexOf(jsonDataType[j]) > -1) {
-							$("#chart-selector-number").append("<option>" + j + "</option>");
-							colNum = j;
-						}
-					}
-					
+					//for the first time fulfill options and create default chart
+					if (clickCount == 1) {
 
-					//handlers for change datetypes in chart
+						//set options to chartpicker + default values for chart
+						for (var j in jsonDataType){
+							if (aTextType.indexOf(jsonDataType[j]) > -1) {
+								$("#chart-selector-text").append("<option>" + j + "</option>");
+								countText++;				
+							}
+
+							if (aNumType.indexOf(jsonDataType[j]) > -1) {
+								$("#chart-selector-number").append("<option>" + j + "</option>");
+								countNum++;
+							}
+						}
+
+						removeChart();
+						createChart(jsonData); 
+					}
+
+
+					//handlers for updating datetypes  in chart
 					$("#chart-selector-text").change(function() {
+						removeChart();
+						createChart(jsonData);
 					});
 
 					$("#chart-selector-number").change(function() {
+						removeChart();
+						createChart(jsonData);
 					});
-					
-
-
-
 
 					/* Datatables */
 					var countCol = 0;
@@ -149,7 +160,6 @@ $(document).ready(function() {
 
 });
 
-
 function isInArray(aoColNames) {
 	if (aoColNames.indexOf("Count") > -1) {
 		var index = aoColNames.indexOf("Count");
@@ -162,7 +172,6 @@ function isInArray(aoColNames) {
 	}
 
 	else {
-		alert("I found nothing");
 		return [1,'desc'];
 	}  
 }
