@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: client_statistics
+-- Host: localhost    Database: client_statistics
 -- ------------------------------------------------------
--- Server version	5.6.21
+-- Server version	5.6.22-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -89,12 +89,10 @@ DROP TABLE IF EXISTS `logs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `logs` (
-  `Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `Finished` char(1) DEFAULT NULL,
-  `Status_stat_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`Time`),
-  KEY `Logs_status_FK_idx` (`Status_stat_id`),
-  CONSTRAINT `Logs_status_FK` FOREIGN KEY (`Status_stat_id`) REFERENCES `status` (`stat_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `finished` tinyint(1) NOT NULL,
+  `error_msg` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -119,7 +117,7 @@ CREATE TABLE `settings` (
   `name` varchar(45) NOT NULL,
   `value` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,32 +126,8 @@ CREATE TABLE `settings` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES (1,'password','password'),(2,'passwordInfo','Heslo ti prozradí Pavel Dobrý.');
+INSERT INTO `settings` VALUES (1,'password','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'),(2,'passwordInfo','Default password');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `status`
---
-
-DROP TABLE IF EXISTS `status`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `status` (
-  `stat_id` int(11) NOT NULL,
-  `error` varchar(100) DEFAULT NULL,
-  `error_msg` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`stat_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `status`
---
-
-LOCK TABLES `status` WRITE;
-/*!40000 ALTER TABLE `status` DISABLE KEYS */;
-/*!40000 ALTER TABLE `status` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -165,4 +139,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-26 10:00:09
+-- Dump completed on 2015-05-10 19:22:55
