@@ -1,6 +1,8 @@
 package kerio.model;
 
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -58,15 +60,20 @@ public class QueryManagement extends DbConnection{
  * @param name
  * @param info
  */
-	public void addQuery(String statement, String name, String info) {
+	public boolean addQuery(String statement, String name, String info) {
 		String addStatement = "INSERT INTO " + tableName + " (" + tableCols
 				+ ") VALUES ( '" + statement + "', '" + name + "', '" + info
-				+ "')";		
-		try {
-			stmnt.executeUpdate(addStatement);
-		} catch (SQLException e) {
-			e.printStackTrace();
+				+ "')";
+		
+		boolean correct = testQuery(statement);
+		if(correct){
+			try {
+				stmnt.executeUpdate(addStatement);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+		return correct;
 	}
 
 	/**
@@ -145,17 +152,36 @@ public class QueryManagement extends DbConnection{
 	 * @param name
 	 * @param info
 	 */
-	public void updateQuery(int id, String statement, String name,
+	public boolean updateQuery(int id, String statement, String name,
 			String info) {
-
 		String updateStatement = "UPDATE " + tableName + " set STATEMENT = '"
 				+ statement + "', NAME = '" + name + "', INFO = '" + info
 				+ "' WHERE id= " + id;
+		boolean correct = testQuery(statement);
+		if(correct){
+			try {
+				stmnt.executeUpdate(updateStatement);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return correct;
+		
+	}
+	
+	private boolean testQuery(String statement){
+		boolean syntaxCorrect = false;
 		try {
-			stmnt.executeUpdate(updateStatement);
+
+			Connection con = stmnt.getConnection();
+			PreparedStatement ps = con.prepareStatement(statement);
+			syntaxCorrect = ps.execute();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return syntaxCorrect;
 	}
 
 }
