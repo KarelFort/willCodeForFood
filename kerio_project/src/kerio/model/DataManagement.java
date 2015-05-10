@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.math.RoundingMode;
 import java.sql.*;
 
 import javax.servlet.ServletContext;
@@ -55,7 +56,7 @@ public class DataManagement extends DbConnection{
 			e1.printStackTrace();
 		}
 		
-/*		PrintWriter writer;
+		PrintWriter writer;
 		try {
 			File f = new File("C:/Users/karel/Desktop/test.json");
 			writer = new PrintWriter(f,
@@ -70,7 +71,7 @@ public class DataManagement extends DbConnection{
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		return resultJson;
 	}
 	
@@ -103,29 +104,20 @@ public class DataManagement extends DbConnection{
 		JSONObject jTypes = new JSONObject();
 		int rows = 0;
 		boolean haveTypes = false;
-		String[] types = null;
-		// PrintStream out = System.out;
 		try {
 			while (result.next()) {
 				ResultSetMetaData rsmd = result.getMetaData();
 				JSONObject jObj = new JSONObject();
 				int cols = rsmd.getColumnCount();
-				if(!haveTypes){
-					types = new String[cols];
-				}
 				for (int i = 1; i <= cols; i++) {
 					int type = rsmd.getColumnType(i);
 					if (type == Types.BIGINT || type == Types.INTEGER) {
-						// out.print("integer: "+result.getInt(i));
 						if(!haveTypes) jTypes.put(rsmd.getColumnLabel(i), "number");
 						jObj.put(rsmd.getColumnLabel(i), result.getInt(i));
 					} else if (type == Types.DECIMAL) {
-						// out.print("decimal: "+result.getBigDecimal(i));
 						if(!haveTypes) jTypes.put(rsmd.getColumnLabel(i), "number");;
-						jObj.put(rsmd.getColumnLabel(i),
-								result.getBigDecimal(i));
+						jObj.put(rsmd.getColumnLabel(i),result.getBigDecimal(i).setScale(2, RoundingMode.HALF_UP));
 					} else {
-						// out.print("Neco jinyho: "+result.getString(i));
 						if(!haveTypes) jTypes.put(rsmd.getColumnLabel(i), "string");;
 						jObj.put(rsmd.getColumnLabel(i), result.getString(i));
 
@@ -133,7 +125,6 @@ public class DataManagement extends DbConnection{
 				}
 				haveTypes = true;
 				jArray.put(jObj);
-				// out.println();
 				rows++;
 			}
 			System.out.println("Number of rows: "+ rows);
