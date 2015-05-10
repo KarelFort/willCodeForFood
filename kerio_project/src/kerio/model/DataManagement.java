@@ -8,6 +8,8 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.math.RoundingMode;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletContext;
 
@@ -29,7 +31,13 @@ public class DataManagement extends DbConnection{
 	}
 
 	
-	
+	/**
+	 * Main method which servlets communicate with
+	 * @param id - Index of statement in database
+	 * @param date1 - First date in range
+	 * @param date2 - Second date in range
+	 * @return - Json object
+	 */
 	public JSONObject dataService(int id, String date1, String date2){
 		
 		String query = getQuery(id);
@@ -75,6 +83,11 @@ public class DataManagement extends DbConnection{
 		return resultJson;
 	}
 	
+	/**
+	 * Gets statement from DB by id
+	 * @param id - Identifier of statement in DB
+	 * @return - Statement
+	 */
 	private static String getQuery(int id){
 		String selection = "STATEMENT";
 		String query = null;
@@ -95,7 +108,13 @@ public class DataManagement extends DbConnection{
 	}
 	
 
-
+	/**
+	 * Creates json object from result set
+	 * @param result - data from DB
+	 * @return - Json object
+	 * @throws SQLException
+	 * @throws JSONException
+	 */
 	private static JSONObject resultToJson(ResultSet result)
 			throws SQLException, JSONException {
 
@@ -141,6 +160,13 @@ public class DataManagement extends DbConnection{
 		return jObjDevice;
 	}
 
+	/**
+	 * Add date range into sql statement
+	 * @param query - Statement from DB
+	 * @param date1 - First date in range
+	 * @param date2 - Second date in range
+	 * @return - Statement supplemented with date range
+	 */
 	private static String setQuery(String query, String date1, String date2){
 		int position;
 		String include = "TIMESTAMP between '" + date1 + "' and '" + date2 + "'";
@@ -166,6 +192,24 @@ public class DataManagement extends DbConnection{
 				
 		return resultQuery;
 	}
-	
-
+	/**
+	 * Gets date of last DB update 
+	 * @return Date in string format
+	 */
+	public String getLastUpdateDB (){
+		ResultSet result;
+		Timestamp date = null;
+		try {
+			result = stmnt.executeQuery("SELECT Time FROM logs WHERE Finished = 1 ORDER BY Time DESC LIMIT 1");
+			result.next();
+			date = result.getTimestamp("Time");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String sDate =  df.format(date);
+		return sDate;
+	}
 }
