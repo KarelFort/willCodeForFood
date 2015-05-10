@@ -192,24 +192,4 @@ public class DataManagement extends DbConnection{
 				
 		return resultQuery;
 	}
-	/**
-	 * Gets date of last DB update 
-	 * @return Date in string format
-	 */
-	public String getLastUpdateDB (){
-		ResultSet result;
-		Timestamp date = null;
-		try {
-			result = stmnt.executeQuery("SELECT Time FROM logs WHERE Finished = 1 ORDER BY Time DESC LIMIT 1");
-			result.next();
-			date = result.getTimestamp("Time");
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String sDate =  df.format(date);
-		return sDate;
-	}
 }
