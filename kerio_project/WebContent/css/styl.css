@@ -56,12 +56,12 @@
 
 rect {
 	cursor: pointer;
-	stroke-width: 2;
+/* 	stroke-width: 2; */
 }
 
-rect.disabled {
-	fill: transparent !important;
-}
+/* rect.disabled { */
+/* 	fill: transparent !important; */
+/* } */
 
 .no-padding {
 	padding: 0px;
