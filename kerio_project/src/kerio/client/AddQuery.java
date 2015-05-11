@@ -32,6 +32,12 @@ public class AddQuery extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//next 4 lines are here for the case, that syntax of SQL is wrong and user is forwarded back to form
+		String message = (String) request.getParameter("message");
+		String message_type = (String) request.getParameter("message_type");		
+		request.setAttribute("message", message);
+		request.setAttribute("message_type", message_type);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("add-query.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -52,12 +58,22 @@ public class AddQuery extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		queries.addQuery(statement, name, info);
-			
-		request.getSession().setAttribute("message", "Query added succesfully");
-		request.getSession().setAttribute("message_type", "success");	
 		
-		response.sendRedirect("administration");
+		if(queries.addQuery(statement, name, info)){
+			request.getSession().setAttribute("message", "Statistic added successfully");
+			request.getSession().setAttribute("message_type", "success");	
+			response.sendRedirect("administration");
+		} else {
+			request.setAttribute("message", "Something went wrong. Check SQL syntax.");
+			request.setAttribute("message_type", "danger");
+			
+			request.setAttribute("name", name);
+			request.setAttribute("info", info);
+			request.setAttribute("statement", statement);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("add-query.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 }

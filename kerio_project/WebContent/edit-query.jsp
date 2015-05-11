@@ -39,7 +39,7 @@
 						<input type="submit" value="Delete" class="btn btn-danger">
 				</form>	
 				<h1 class="page-header">Edit statistic</h1>
-				
+				<p class="alert-${requestScope.message_type}">${requestScope.message}</p>
 				<form action="edit-query" method="post" >
 						<label>Name:</label>  (required)
 						<input type="text" name="name" class="form-control" value="${gueryToEdit.name}" required> 
@@ -49,7 +49,7 @@
 						 
 						<label>Query:</label>  (required)
 						
-						<textarea rows="7" cols="50" name="statement" class="form-control" value="${gueryToEdit.statement}" required>${gueryToEdit.statement}</textarea>					
+						<textarea rows="7" cols="50" name="statement" class="form-control" required>${gueryToEdit.statement}</textarea>					
 
 						<input type="hidden" name="id" value="${gueryToEdit.id}" />
 						<br>

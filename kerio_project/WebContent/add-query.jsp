@@ -31,16 +31,16 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 				<h1 class="page-header">Add statistic</h1>
-
+				<p class="alert-${requestScope.message_type}">${requestScope.message}</p>
 				<form action="add-query" method="post" >
 						<label>Name:</label>  (required)
-						<input type="text" name="name" class="form-control" required> 
+						<input type="text" name="name" class="form-control" value="${name}" required> 
 						
 						<label>Description:</label>  (required)
-						<input type="text" name="info" class="form-control" required>
+						<input type="text" name="info" class="form-control" value="${info}" required>
 						 
 						<label>Query:</label>  (required)
-						<input type="text" name="statement" class="form-control" required> 
+						<textarea rows="7" cols="50" name="statement" class="form-control" required>${statement}</textarea>
 						<br>
 						<input type="submit" value="Save" class="btn btn-success">
 				</form>		
