@@ -20,7 +20,6 @@ public class ApplicationDatabaseUpdate {
 	private String applicationdbURL = "";
 	private String applicationdbLogin = "";
 	private String applicationdbPassword = "";
-	
 	private String keriodbLogin = "";
 	private String keriodbPassword = "";	
 	private String keriodbURL = "";
