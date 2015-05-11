@@ -17,11 +17,12 @@ import java.util.Date;
 
 public class ApplicationDatabaseUpdate {
 	
-	// set connection details
-	private static String csvConnetionDataFile = "DatabaseConnectionData.csv";
 	private String applicationdbURL = "";
-	private String login = "";
-	private String password = "";
+	private String applicationdbLogin = "";
+	private String applicationdbPassword = "";
+	
+	private String keriodbLogin = "";
+	private String keriodbPassword = "";	
 	private String keriodbURL = "";
 	private Statement stmnt1, stmnt2;
 	private Connection keriodbConnection = null;
@@ -33,7 +34,7 @@ public class ApplicationDatabaseUpdate {
 	
 	public static void main(String[] args) {
 		ApplicationDatabaseUpdate appDBUpdate = new ApplicationDatabaseUpdate();
-		appDBUpdate.loadConnectionData(csvConnetionDataFile);
+		appDBUpdate.loadConnectionData(args[0]);
 		appDBUpdate.initConnections();
 	}
 	
@@ -50,11 +51,15 @@ public class ApplicationDatabaseUpdate {
 			String[] data = line.split(splitter);
 			
 			applicationdbURL = data[0];
-			keriodbURL = data[1];
-			login = data[2];
-			password = data[3];
+			applicationdbLogin = data[1];
+			applicationdbPassword = data[2];
+			keriodbURL = data[3];
+			keriodbLogin = data[4];
+			keriodbPassword = data[5];
 		}
 		catch (IOException e){
+			System.out.println(e);
+		}catch(IndexOutOfBoundsException e){
 			System.out.println(e);
 		}
 	}
@@ -66,14 +71,14 @@ public class ApplicationDatabaseUpdate {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			
 			applicationdbConnection = DriverManager.getConnection(applicationdbURL,
-					login, password);
+					applicationdbLogin, applicationdbPassword);
 			stmnt1 = applicationdbConnection.createStatement();
 			result = stmnt1.executeQuery("SELECT DISTINCT reminder_id FROM clients");
 			while(result.next()) {
 				appdbResultList.add(result.getInt(1));
 			}
 			
-			keriodbConnection = DriverManager.getConnection(keriodbURL, login, password);
+			keriodbConnection = DriverManager.getConnection(keriodbURL, keriodbLogin, keriodbPassword);
 			stmnt2 = keriodbConnection.createStatement();
 			result = stmnt2.executeQuery("SELECT DISTINCT reminder_id FROM clients");
 			while(result.next()) {

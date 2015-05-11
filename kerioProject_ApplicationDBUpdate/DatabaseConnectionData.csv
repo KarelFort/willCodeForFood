@@ -1,0 +1,2 @@
+Application database path;Application database login;Application database password;Source database path;Source database login;Source database password;
+jdbc:mysql://localhost:3306/client_statistics;root;password;jdbc:mysql://localhost:3306/kerio;root;password;
