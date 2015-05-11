@@ -1,4 +1,4 @@
-Adresář AppDBUpdate/run uložte na libovolné místo na disku. 
+Adresář uložte na libovolné místo na disku. 
 V souboru ConnectionDetails.csv změnte údaje o připojení k aplikační a zdrojové databázi. 
 Tento soubor je vstupním parametrem pro aktualizační program. 
 Pro periodické spouštění programu vytvořte úlohu v programu windows scheduler (plánovač úloh). 
