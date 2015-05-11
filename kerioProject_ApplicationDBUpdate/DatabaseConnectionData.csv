@@ -1,2 +1,0 @@
-Application database path; Source database path; Login; Password;
-jdbc:mysql://localhost:3306/client_statistics;jdbc:mysql://localhost:3306/keriodump;root;password;
