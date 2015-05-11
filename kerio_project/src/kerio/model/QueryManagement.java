@@ -178,7 +178,7 @@ public class QueryManagement extends DbConnection{
 			syntaxCorrect = ps.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		return syntaxCorrect;
